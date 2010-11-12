@@ -2,4 +2,5 @@
 <resources>
     <string name="hello">Hello World, MyCSUFi!</string>
     <string name="app_name">MyCSUFi</string>
+    <string name="myClassScheduleText">None.</string>
 </resources>
