@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+			xmlns:android="http://schemas.android.com/apk/res/android"
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			android:padding="6dip">		
+	
+<TextView 	android:id="@+id/TextView01"
+			android:layout_width="260dip"
+			android:layout_height="wrap_content"
+			android:layout_alignParentLeft="true"
+			android:layout_alignParentTop="true"
+			android:layout_marginLeft="5dip"
+			android:text="@+id/TextView01"
+			/>
+			
+<TextView   android:id="@+id/TextView02"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignParentBottom="false"
+			android:layout_alignParentLeft="true"
+			android:layout_marginLeft="5dip"
+			android:text="@+id/TextView02"
+			android:layout_below="@+id/TextView01"
+ 			/>
+
+<ImageView
+        	android:src = "@drawable/nav2"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:id="@+id/logo"
+			android:clickable="false"
+			android:layout_toRightOf="@+id/TextView01"
+			android:focusable="false"
+			android:focusableInTouchMode="false"
+			android:drawingCacheQuality="auto" 
+            />
+
+</RelativeLayout>
