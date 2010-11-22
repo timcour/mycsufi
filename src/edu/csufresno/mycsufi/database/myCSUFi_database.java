@@ -1,5 +1,7 @@
 package edu.csufresno.mycsufi.database;
 
+//comment for edit to repository
+
 import edu.csufresno.mycsufi.R;
 import android.app.Activity;
 import android.database.Cursor;
