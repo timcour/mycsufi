@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.widget.TextView;
 import edu.csufresno.mycsufi.student.ClassSchedule;
+import edu.csufresno.mycsufi.NetConnector;
 
 public class MyCSUFi extends Activity {
     /** Called when the activity is first created. */
@@ -23,6 +24,8 @@ public class MyCSUFi extends Activity {
         myText.append("\n");
         myText.append(classSchedule.courses.get(0).getDaysAndTimes().toString());
         myText.append("\n");
+        
+        NetConnector netConnector = new NetConnector();
     }
     
 }

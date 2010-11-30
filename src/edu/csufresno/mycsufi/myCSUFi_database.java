@@ -1,4 +1,4 @@
-package edu.csufresno.mycsufi.database;
+package edu.csufresno.mycsufi;
 
 //comment for edit to repository
 

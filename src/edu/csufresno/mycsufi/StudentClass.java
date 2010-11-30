@@ -1,4 +1,4 @@
-package edu.csufresno.mycsufi.database;
+package edu.csufresno.mycsufi;
 
 public class StudentClass {
 
@@ -40,7 +40,9 @@ public class StudentClass {
 
  
   
-  public StudentClass(String name, String instructor, String room, String building, String start, String end, String days) {
+  public StudentClass(
+		  // there should probably be default values.
+		  String name, String instructor, String room, String building, String start, String end, String days) {
     Name = name;
     Instructor = instructor;
     Room = room;
