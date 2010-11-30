@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#ffffffff">
+    <ImageView   
+        android:id="@+id/seal"
+        android:src="@drawable/seal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="25dip"
+         />
+    <Button
+        android:id="@+id/login"
+        android:layout_width="wrap_content"
+        android:layout_height="40dip"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:text=" Login "
+        android:layout_marginBottom="15dip"
+        android:layout_marginTop="6dip"
+         />
+    <CheckBox 
+        android:id="@+id/rememberme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Remember Me"
+        android:textColor="#777777"        
+        android:layout_alignBaseline="@id/login"
+        android:checked="true"
+         />
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:drawable/editbox_background"
+        android:layout_above="@id/login"
+        android:hint="Password"
+        android:password="true"
+         />
+    <EditText
+        android:id="@+id/user"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:drawable/editbox_background"
+        android:layout_above="@id/password"
+		android:hint="User Name"
+		android:inputType="textNoSuggestions"
+		 />
+    <TextView
+        android:id="@+id/myCSUFi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/user"
+        android:text="myCSUFi"
+		android:layout_marginLeft ="8dip"
+        android:textColor="#BB0000"
+        android:textStyle="bold"/>
+    <TextView
+        android:id="@+id/version"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="11dip"
+        android:layout_alignBaseline ="@id/myCSUFi"
+		android:layout_toRightOf ="@id/myCSUFi"
+		android:layout_marginLeft ="8dip"
+		android:textColor="#000099"
+        android:text="Ver. 0.1"
+        />
+</RelativeLayout>

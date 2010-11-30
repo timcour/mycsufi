@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="loginURL">https://my.csufresno.edu/psp/mfs/?cmd=login%26amplanguageCd=ENG</string>
+    <string name="postUsername">userid</string>
+    <string name="postPassword">pwd</string>
+    <string name="postTimeoffset">timezoneOffset</string>
+</resources>

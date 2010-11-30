@@ -1,10 +1,12 @@
 package edu.csufresno.mycsufi;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 import edu.csufresno.mycsufi.student.ClassSchedule;
 import edu.csufresno.mycsufi.NetConnector;
+import edu.csufresno.mycsufi.relativeLogin;
 
 public class MyCSUFi extends Activity {
     /** Called when the activity is first created. */
@@ -13,7 +15,20 @@ public class MyCSUFi extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         
-        /* Tim's Example code */
+        boolean existingSchedule = false;
+        
+        // check for existing schedule
+        
+        if(!existingSchedule){
+        	Intent intent = new Intent(MyCSUFi.this, relativeLogin.class);
+        	startActivity(intent);
+        }
+    }
+    
+    
+    
+    private void RunTest() {
+    	/* Tim's Example code */
         TextView myText = (TextView)findViewById(R.id.myClassScheduleText);
         ClassSchedule classSchedule = new ClassSchedule();
         classSchedule.FillSchedule();
