@@ -1,12 +1,13 @@
 package edu.csufresno.mycsufi;
 
+import android.content.Context;
 import java.util.ArrayList;
 import edu.csufresno.mycsufi.NetConnector;
+import edu.csufresno.mycsufi.DBAdapter;
 
 public class StudentClassSchedule {
 
 	private ArrayList<StudentClass> _classes;
-	private boolean isEmpty = true;
 
 	public StudentClassSchedule() {
 		_classes = new ArrayList<StudentClass>();
@@ -37,9 +38,21 @@ public class StudentClassSchedule {
 				
 	}
 	
-	
-	public void loadFromDB () {
-		
+	/**
+	 * @param _context
+	 * Populate _classes with class information from database.
+	 *   Sets _classes = new ArrayList<StudentClass>() if problem reading db.
+	 */
+	public void loadFromDB (Context _context) {
+		DBAdapter dba = new DBAdapter(_context);
+		try {
+			dba.open();
+			_classes = dba.getClasses();
+			dba.close();
+		} catch (Throwable t) {
+			System.out.println(t);
+			_classes = new ArrayList<StudentClass>();
+		}		
 	}
 	
 	

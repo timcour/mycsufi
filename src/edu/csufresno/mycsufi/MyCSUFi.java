@@ -20,7 +20,7 @@ public class MyCSUFi extends Activity {
         
         
         // Attempt Schedule load from DB
-        studentClassSchedule.loadFromDB();        
+        studentClassSchedule.loadFromDB(this);        
         
         if(studentClassSchedule.isEmpty()){
         	//TODO: add code to relativeLogin which will fetch class schedule

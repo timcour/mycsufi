@@ -12,6 +12,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.util.Log;
 
+/**
+ * @author Anthony
+ *
+ */
 public class DBAdapter {
 	private static final String DATABASE_NAME = "myCSUFi.db";
 	private static final String DATABASE_TABLE = "classInfo";
@@ -124,7 +128,62 @@ public class DBAdapter {
 
 		}
 	}
-
+	
+	/* params:
+	 * @day : two char string of the day from which to pull classes
+	 *	        (Mo, Tu, We, Th, Fr, Sa, Su)
+	 * Return : ArrayList of StudentClass objects
+	*/
+	public ArrayList<StudentClass> getClassesByDay(String day) {
+		ArrayList<StudentClass> _classes = new ArrayList<StudentClass>();
+		
+		Cursor _cur = getAllCursor();
+		_cur.requery();
+		_cur.moveToFirst();
+		
+		while (_cur.isAfterLast() == false) {
+			if (_cur.getString(DAYS_COLUMN).contains(day)) {
+				StudentClass _class = new StudentClass(
+						_cur.getString(CLASSNAME_COLUMN),
+						_cur.getString(INSTRUCTOR_COLUMN),
+						_cur.getString(ROOM_COLUMN),
+						_cur.getString(BUILDING_COLUMN),
+						_cur.getString(STARTTIME_COLUMN),
+						_cur.getString(ENDTIME_COLUMN),
+						_cur.getString(DAYS_COLUMN)
+						);
+				_classes.add(_class);
+			}
+			_cur.moveToNext();					
+		}
+		_cur.close();		
+		return _classes;
+	}
+	
+	public ArrayList<StudentClass> getClasses() {
+		ArrayList<StudentClass> _classes = new ArrayList<StudentClass>();
+		
+		Cursor _cur = getAllCursor();
+		_cur.requery();
+		_cur.moveToFirst();
+		
+		while (_cur.isAfterLast() == false) {
+			StudentClass _class = new StudentClass(
+					_cur.getString(CLASSNAME_COLUMN),
+					_cur.getString(INSTRUCTOR_COLUMN),
+					_cur.getString(ROOM_COLUMN),
+					_cur.getString(BUILDING_COLUMN),
+					_cur.getString(STARTTIME_COLUMN),
+					_cur.getString(ENDTIME_COLUMN),
+					_cur.getString(DAYS_COLUMN)
+					);
+			_classes.add(_class);			
+			_cur.moveToNext();					
+		}
+		_cur.close();		
+		return _classes;
+	}
+	
 	public Cursor getAllCursor() {
 		return db.query(DATABASE_TABLE, new String[] { KEY_ID, KEY_CLASSNAME,
 				KEY_INSTRUCTOR, KEY_ROOM, KEY_BUILDING, KEY_STARTTIME,
