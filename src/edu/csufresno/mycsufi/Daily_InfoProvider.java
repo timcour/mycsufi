@@ -1,5 +1,7 @@
 package edu.csufresno.mycsufi;
 
+// lets not do this... one function can take the place of most of this.
+
 import java.util.ArrayList;
 
 import android.database.Cursor;

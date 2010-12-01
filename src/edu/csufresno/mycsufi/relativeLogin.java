@@ -1,6 +1,9 @@
 package edu.csufresno.mycsufi;
 
+import edu.csufresno.mycsufi.MyCSUFi;
+import edu.csufresno.mycsufi.DBAdapter;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -13,55 +16,81 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class relativeLogin extends Activity {
-    /** Called when the activity is first created. */
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.relative_login);
-        //ImageView image = (ImageView) findViewById(R.id.seal);
+	private StudentClassSchedule studentClassSchedule = new StudentClassSchedule();
+	private DBAdapter dba = new DBAdapter(this);
 
-        //This is used to grab data from the user text field when you press enter in the password field
-        final EditText usertext = (EditText) findViewById(R.id.user);
-        final EditText passwordtext = (EditText) findViewById(R.id.password);
-        passwordtext.setOnKeyListener(new OnKeyListener() {
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                //Waiting for the "enter" button
-                if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
-                    (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                  //Performed action when "enter" pressed
-                  Toast.makeText(relativeLogin.this, usertext.getText(), Toast.LENGTH_SHORT).show();
-                  Toast.makeText(relativeLogin.this, passwordtext.getText(), Toast.LENGTH_SHORT).show();
-                  return true;
-                }
-                return false;
-            }
-        });
-        
-        
-        //If the login button is pressed instead of using the enter key
-        final Button loginbtn = (Button) findViewById(R.id.login);
-        loginbtn.setOnClickListener(new OnClickListener() {
-            public void onClick(View v) {
-                //Perform action on click
-                Toast.makeText(relativeLogin.this, "Logging In ... ", Toast.LENGTH_LONG).show();
-            }
-        });
-        
-        
-        //Checkbox Monitor
-        final CheckBox rememberbox = (CheckBox) findViewById(R.id.rememberme);
-        rememberbox.setOnClickListener(new OnClickListener() {
-            public void onClick(View v) {
-                //Perform action on clicks depending on whether it's now checked
-                if (((CheckBox) v).isChecked()) {
-                    Toast.makeText(relativeLogin.this, "Remember Me Selected", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(relativeLogin.this, "Remember Me Not selected", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-        
-    
-    }
-    
+	/** Called when the activity is first created. */
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.relative_login);
+
+		final EditText usertext = (EditText) findViewById(R.id.user);
+		final EditText passwordtext = (EditText) findViewById(R.id.password);
+
+		// Grab user entries on Enter
+		passwordtext.setOnKeyListener(new OnKeyListener() {
+			public boolean onKey(View v, int keyCode, KeyEvent event) {
+
+				// Waiting for the "enter" button
+				if ((event.getAction() == KeyEvent.ACTION_DOWN)
+						&& (keyCode == KeyEvent.KEYCODE_ENTER)) {
+
+					// Performed action when "enter" pressed
+					fetchSchedule(usertext, passwordtext);
+					return true;
+				}
+				return false;
+			}
+		});
+
+		// If the login button is pressed instead of using the enter key
+		final Button loginbtn = (Button) findViewById(R.id.login);
+		loginbtn.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				// Perform action on click
+				fetchSchedule(usertext, passwordtext);
+			}
+		});
+
+		// Checkbox Monitor
+		final CheckBox rememberbox = (CheckBox) findViewById(R.id.rememberme);
+		rememberbox.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				// Perform action on clicks depending on whether it's now
+				// checked
+				if (((CheckBox) v).isChecked()) {
+					Toast.makeText(relativeLogin.this, "Save password.",
+							Toast.LENGTH_SHORT).show();
+				} else {
+					Toast.makeText(relativeLogin.this,
+							"Forget password.", Toast.LENGTH_SHORT)
+							.show();
+				}
+			}
+		});
+
+	}
+
+	private void fetchSchedule(EditText usertext, EditText passwordtext) {
+		Toast.makeText(relativeLogin.this,
+				"Fetching " + usertext.getText() + "'s Schedule",
+				Toast.LENGTH_SHORT).show();
+		studentClassSchedule.loadFromServer(usertext.toString(),
+				passwordtext.toString());
+
+		if (studentClassSchedule.getClasses().size() > 0) {
+			Toast.makeText(relativeLogin.this, "Success.", Toast.LENGTH_SHORT)
+					.show();
+			dba.open();
+			dba.insert_ToDatabase(dba, studentClassSchedule.getClasses());
+			dba.close();
+			Intent intent = new Intent(relativeLogin.this, MyCSUFi.class);
+			startActivity(intent);
+		} else {
+			Toast.makeText(relativeLogin.this, "Fetch Fail.",
+					Toast.LENGTH_SHORT).show();
+		}
+	}
+
 }

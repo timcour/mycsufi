@@ -33,10 +33,13 @@ public class NetConnector {
 	}
 	
 	public void PullStudentSchedule(String username, String password) {
-		// see TestAuthentication() for guidence
-		
-		// For now, just fill schedule with dummy info.
-		FillScheduleTesting();
+		// ****************************************************
+		// place holder functionality pending query being live.
+		// ****************************************************
+		_classes.add( new StudentClass("CSCI150", "Liu", "102", "Ag Sci", "3:00pm", "3:50pm", "MoWe"));
+		_classes.add( new StudentClass("CSCI115", "Seki", "108", "Mckee Fisk", "12:00pm", "12:50pm", "MoWeFr"));
+		_classes.add( new StudentClass("CSCI113", "Jin", "108", "Mckee Fisk", "8:00am", "8:50am", "MoWeFr"));
+		_classes.add( new StudentClass("MUSIC171", "Hooshmandrad", "167", "Music", "11:00am", "11:50am", "MoWeFr"));
 	}
 		
 	public ArrayList<StudentClass> GetSchedule() {
@@ -46,18 +49,6 @@ public class NetConnector {
 	private String GetTimezoneOffset() {
 		Date d = new Date();
 		return Integer.toString(d.getTimezoneOffset());		
-	}
-	
-	private void FillScheduleTesting() {
-		try {
-			for( int i = 0; i<2; i++ ){
-				StudentClass studentClass = new StudentClass(
-						"Tim", "prof", "ee122", "EE", "12:00", "1:00", "MoWe");
-				_classes.add(studentClass);
-			}
-		} catch (Throwable t) {
-			System.out.println(t);
-		}
 	}
 	
 	private void TestAuthentication(String user, String pass) {

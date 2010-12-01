@@ -11,6 +11,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.util.Log;
+import android.widget.Toast;
 
 /**
  * @author Anthony
@@ -109,24 +110,19 @@ public class DBAdapter {
 				null) > 0;
 	}
 
-	public void insert_ToDatabase(DBAdapter _db,
-			ArrayList<StudentClass> _classes) {
-
-		if (_db.getAllCursor().getCount() == 0) {
-			// toast "populating database"
-
-			for (int i = 0; i < _classes.size(); i++) {
-				_db.insertStudentClass(_classes.get(i));
-			}
+	public void insert_ToDatabase(DBAdapter _db, ArrayList<StudentClass> _classes) {
+		
+		for (int i = 0; i < _classes.size(); i++) {
+			_db.insertStudentClass(_classes.get(i));
 		}
-
-		else {
+		/*if (_db.getAllCursor().getCount() == 0) {
+			// toast "populating database"
+		} else {
 			// toast "updating database"
 			for (int i = 0; i < _classes.size(); i++) {
 				_db.updateStudentClass(i, _classes.get(i));
 			}
-
-		}
+		} */
 	}
 	
 	/* params:

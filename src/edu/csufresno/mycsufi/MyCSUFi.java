@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
-import edu.csufresno.mycsufi.student.ClassSchedule;
 import edu.csufresno.mycsufi.NetConnector;
 import edu.csufresno.mycsufi.relativeLogin;
 import edu.csufresno.mycsufi.DBAdapter;
@@ -26,34 +25,34 @@ public class MyCSUFi extends Activity {
         	//TODO: add code to relativeLogin which will fetch class schedule
         	Intent intent = new Intent(MyCSUFi.this, relativeLogin.class);
         	startActivity(intent);
-        }
-        else {
-        	
-        }
-        
-        DBInsertTestEntries();
+        } else {
+        	printDbLoad();        	
+        }                
     }
     
-    
+    // ***************************************************************
+    // The following functions can be put into the JUnit test project
+    // **************************************************************
+    private void printDbLoad () {
+    	String s;
+    	setContentView(R.layout.main);
+        TextView myText = (TextView)findViewById(R.id.myClassScheduleText);
+        for ( int i = 0; i < studentClassSchedule.getClasses().size(); i++ ){
+        	s = studentClassSchedule.getClasses().get(i).getCatInfo();
+        	myText.append(s);
+        }
+    }
     
     private void RunTest() {
     	/* Tim's Example code */
         setContentView(R.layout.main);
         TextView myText = (TextView)findViewById(R.id.myClassScheduleText);
-        ClassSchedule classSchedule = new ClassSchedule();
-        classSchedule.FillSchedule();
-        myText.setText("");
-        myText.append(Integer.toString(classSchedule.courses.get(0).getClassNumber()));
-        myText.append("\n");
-        myText.append(classSchedule.courses.get(0).getCourseName().toString());
-        myText.append("\n");
-        myText.append(classSchedule.courses.get(0).getDaysAndTimes().toString());
-        myText.append("\n");
         
-        NetConnector netConnector = new NetConnector();
+        NetConnector netConn = new NetConnector();
+        netConn.PullStudentSchedule("testuser", "testpass");
     }
     
-    private void DBInsertTestEntries () {
+    public void DBInsertTestEntries () {
     	DBAdapter db = new DBAdapter(this);
     	StudentClass CSCI150 = new StudentClass("CSCI150", "Liu", "102", "Ag Sci", "3:00pm", "3:50pm", "MoWe");
 		StudentClass CSCI115 = new StudentClass("CSCI115", "Seki", "108", "Mckee Fisk", "12:00pm", "12:50pm", "MoWeFr");

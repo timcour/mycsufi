@@ -1,6 +1,6 @@
 package edu.csufresno.mycsufi;
 
-//comment for edit to repository
+// this file may be an artifact of development.
 
 import edu.csufresno.mycsufi.R;
 import android.app.Activity;
