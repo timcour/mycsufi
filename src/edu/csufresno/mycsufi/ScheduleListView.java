@@ -1,6 +1,8 @@
 package edu.csufresno.mycsufi;
 
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -19,10 +21,6 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-import edu.csufresno.mycsufi.StudentClassSchedule;
-import edu.csufresno.mycsufi.StudentClass;
-// Place holder for listView class to be constructed using Muhammad's 
-//   customlistview code.
 
 public class ScheduleListView extends Activity{
 
@@ -31,6 +29,7 @@ public class ScheduleListView extends Activity{
 	public static String[] place;
 	public static String[] time;
 	public static String[] cord;
+	StudentClassSchedule studentClassSchedule=new StudentClassSchedule();
 
 	public static class EfficientAdapter extends BaseAdapter {
 		private LayoutInflater mInflater;
@@ -119,9 +118,18 @@ public class ScheduleListView extends Activity{
 	private void screen()
 	{
 		String day=days[dayofweek];
-		place=studentClassSchedule.getDayOfWeek(day,"Place");
-		time=studentClassSchedule.getDayOfWeek(day,"Time");
-		cord=studentClassSchedule.getDayOfWeek(day,"Cord");
+		ArrayList<StudentClass> classes= studentClassSchedule.getClassesByDayOfWeek(day);
+		place = new String[classes.size()];
+		time = new String[classes.size()];
+		for(int i=0;i<classes.size();i++)
+		{
+			StudentClass sclass=classes.get(i);
+			//String ClassName=sclass.getName();
+			place[i]=sclass.getRoom()+" " + sclass.getBuilding();
+			time[i]=sclass.getStarttime() +" " + sclass.getName();
+			
+		}
+
 		updateview();
 		
 	};
