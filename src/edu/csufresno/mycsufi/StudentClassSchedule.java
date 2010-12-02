@@ -35,6 +35,15 @@ public class StudentClassSchedule {
 		return _classes;
 	}
 	
+	public ArrayList<StudentClass> getClassesByDayOfWeek ( String day ) {
+		ArrayList<StudentClass> sclasses = this.getClasses();
+		
+		for( int i = 0; i < this.getClasses().size(); i++) {
+			if( sclasses.get(i).getDays().contains(day) );
+		}
+		return sclasses;
+	}
+	
 	public boolean isEmpty() {
 		if (_classes.size() > 0) return false;
 		return true;
