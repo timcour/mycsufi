@@ -138,7 +138,6 @@ public class ScheduleListView extends Activity{
 		ListView l1 = (ListView) findViewById(R.id.ListView01);
 		l1.setAdapter(new EfficientAdapter(this));
 		l1.setOnItemClickListener(new OnItemClickListener() {
-			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				Toast.makeText(getBaseContext(), "You clciked " + cord[arg2],
