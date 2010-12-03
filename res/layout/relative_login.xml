@@ -50,23 +50,32 @@
 		android:inputType="textNoSuggestions"
 		 />
     <TextView
-        android:id="@+id/myCSUFi"
+        android:id="@+id/my"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@id/user"
-        android:text="myCSUFi"
+        android:text="my"
 		android:layout_marginLeft ="8dip"
-        android:textColor="#BB0000"
+        android:textColor="#000099"
+        android:textStyle="bold"/>
+    <TextView
+        android:id="@+id/FresnoState"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline ="@id/my"
+		android:layout_toRightOf ="@id/my"
+		android:textColor="#BB0000"
+        android:text="FresnoState"
         android:textStyle="bold"/>
     <TextView
         android:id="@+id/version"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="11dip"
-        android:layout_alignBaseline ="@id/myCSUFi"
-		android:layout_toRightOf ="@id/myCSUFi"
+        android:layout_alignBaseline ="@id/FresnoState"
+		android:layout_toRightOf ="@id/FresnoState"
 		android:layout_marginLeft ="8dip"
 		android:textColor="#000099"
-        android:text="Ver. 0.1"
+        android:text="@string/version"
         />
 </RelativeLayout>
