@@ -11,13 +11,11 @@ import edu.csufresno.mycsufi.StudentClass;
 public class MyCSUFiTest extends ActivityInstrumentationTestCase2<MyCSUFi> {
 	private MyCSUFi mActivity;
 	private TextView mView;
-	private String resourceString;
 	DBAdapter db;
 	private ArrayList<StudentClass> sclass;
 	
 	public MyCSUFiTest() {
 		super("edu.csufresno.mycsufi", MyCSUFi.class);
-		db = new DBAdapter(this.mActivity);
 		sclass = new ArrayList<StudentClass>();
 	}
 	
@@ -26,17 +24,13 @@ public class MyCSUFiTest extends ActivityInstrumentationTestCase2<MyCSUFi> {
 		super.setUp();
 		mActivity = this.getActivity();
 		mView = (TextView) mActivity.findViewById(edu.csufresno.mycsufi.R.id.TextViewMain);
-		resourceString = mActivity.getString(edu.csufresno.mycsufi.R.string.hello);
+		db = new DBAdapter(mActivity.getBaseContext());
 	}
 	
 	public void testPreconditions() {
 		assertNotNull(mView);
 		assertNotNull(sclass);
-	}
-	
-	// 
-	public void testHelloText() {
-		assertEquals(resourceString, (String)mView.getText());
+		assertNotNull(db);
 	}
 	
 	public void testDBInsertions () {    	
