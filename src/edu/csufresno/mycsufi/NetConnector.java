@@ -15,8 +15,10 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
 
+import org.apache.http.cookie.ClientCookie;
+
 public class NetConnector {
-	private ArrayList<StudentClass> _classes = new ArrayList<StudentClass>();
+	private ArrayList<StudentClass> _classes;
 	private DefaultHttpClient client = null;
 	private String loginURLStr;
 	private String postUsernameStr;
@@ -24,6 +26,7 @@ public class NetConnector {
 	private String postTimeoffsetStr;
 	
 	public NetConnector() {
+		_classes = new ArrayList<StudentClass>();
 		loginURLStr = "https://my.csufresno.edu/psp/mfs/?cmd=login&languageCd=ENG";
 		postUsernameStr = "userid";
 		postPasswordStr = "pwd";
@@ -40,6 +43,20 @@ public class NetConnector {
 		_classes.add( new StudentClass("CSCI115", "Seki", "108", "Mckee Fisk", "12:00pm", "12:50pm", "MoWeFr"));
 		_classes.add( new StudentClass("CSCI113", "Jin", "108", "Mckee Fisk", "8:00am", "8:50am", "MoWeFr"));
 		_classes.add( new StudentClass("MUSIC171", "Hooshmandrad", "167", "Music", "11:00am", "11:50am", "MoWeFr"));
+	}
+	
+	private void parseHtml(String scheduleHtml) {
+		
+	}
+	
+	private void parseCSV (String CSV) {
+		// Turn a CSV string into an ArrayList<StudentClass> object
+	}
+	
+	private ArrayList<ClientCookie> getMyCSUFresnoCookies ( ) {
+		ArrayList<ClientCookie> fsCookies = new ArrayList<ClientCookie>();
+		
+		return fsCookies;
 	}
 		
 	public ArrayList<StudentClass> GetSchedule() {

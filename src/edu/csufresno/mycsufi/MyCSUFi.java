@@ -16,7 +16,16 @@ public class MyCSUFi extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        TextView myText = (TextView)findViewById(R.id.TextViewMain);
         
+        ClientFormLogin cfl;
+        cfl = new ClientFormLogin();
+        
+        try {
+        	cfl.go();
+        } catch (Exception e) {
+        	System.out.println("CFL Exception: " + e);
+        }
         
         // Attempt Schedule load from DB
         studentClassSchedule.loadFromDB(this);        
@@ -26,7 +35,7 @@ public class MyCSUFi extends Activity {
         	Intent intent = new Intent(MyCSUFi.this, relativeLogin.class);
         	startActivity(intent);
         } else {
-        	printDbLoad();        	
+        	myText.setText(R.string.hello);     	
         }                
     }
     
@@ -52,17 +61,5 @@ public class MyCSUFi extends Activity {
         netConn.PullStudentSchedule("testuser", "testpass");
     }
     
-    public void DBInsertTestEntries () {
-    	DBAdapter db = new DBAdapter(this);
-    	StudentClass CSCI150 = new StudentClass("CSCI150", "Liu", "102", "Ag Sci", "3:00pm", "3:50pm", "MoWe");
-		StudentClass CSCI115 = new StudentClass("CSCI115", "Seki", "108", "Mckee Fisk", "12:00pm", "12:50pm", "MoWeFr");
-		StudentClass CSCI113 = new StudentClass("CSCI113", "Jin", "108", "Mckee Fisk", "8:00am", "8:50am", "MoWeFr");
-		StudentClass MUSIC171 = new StudentClass("MUSIC171", "Hooshmandrad", "167", "Music", "11:00am", "11:50am", "MoWeFr");
-		db.open();
-		db.insertStudentClass(CSCI150);
-	    db.insertStudentClass(CSCI115);
-	    db.insertStudentClass(CSCI113);
-	    db.insertStudentClass(MUSIC171);
-	    db.close();
-    }
+    
 }

@@ -56,6 +56,10 @@ public class DBAdapter {
 			db = dbHelper.getReadableDatabase();
 		}
 	}
+	
+	public boolean isOpen() {
+		return db.isOpen();
+	}
 
 	public void close() {
 		db.close();
