@@ -96,8 +96,12 @@ public class ScheduleListView extends Activity {
 					&& Math.abs(velocityX) >= SWIPE_THRESHOLD_VELOCITY
 					&& Math.abs(dX) >= SWIPE_MIN_DISTANCE) {
 				if (dX > 0) {
-					dayofweek = (dayofweek - 1) % 7;
-					dayofweek = dayofweek * -1;
+					dayofweek = (dayofweek) % 7;
+					dayofweek = dayofweek -1;
+					if (dayofweek <0)
+					{
+						dayofweek=dayofweek+6;// work with this 
+					}
 					Toast.makeText(getBaseContext(), dayStrings[dayofweek],
 							Toast.LENGTH_SHORT).show();
 					screen();
@@ -118,8 +122,6 @@ public class ScheduleListView extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.schedulemain);
 		studentClassSchedule.loadFromDB(this);
-		// TextView myText = (TextView) findViewById(R.id.TextView04);
-		// myText.setText("Monday");
 		screen();
 	}// end off on create
 
@@ -172,7 +174,7 @@ public class ScheduleListView extends Activity {
 		l1.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-				Toast.makeText(getBaseContext(), "You clciked ",
+				Toast.makeText(getBaseContext(), "You clcied "+ cord[arg2],
 						Toast.LENGTH_LONG).show();
 			}
 		});
