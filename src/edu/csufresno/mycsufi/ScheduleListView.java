@@ -97,17 +97,14 @@ public class ScheduleListView extends Activity {
 					&& Math.abs(velocityX) >= SWIPE_THRESHOLD_VELOCITY
 					&& Math.abs(dX) >= SWIPE_MIN_DISTANCE) {
 				if (dX > 0) {
-					dayofweek = (dayofweek) % 7;
-					dayofweek = dayofweek -1;
-					if (dayofweek <0)
-					{
-						dayofweek=dayofweek+6;// work with this 
-					}
+					dayofweek = (dayofweek+ 5) % 6;
+
 					Toast.makeText(getBaseContext(), dayStrings[dayofweek],
 							Toast.LENGTH_SHORT).show();
 					screen();
-				} else {
-					dayofweek = (dayofweek + 1) % 7;
+				} 
+				else {
+					dayofweek = (dayofweek + 1) % 6;
 					Toast.makeText(getBaseContext(), dayStrings[dayofweek],
 							Toast.LENGTH_SHORT).show();
 					screen();
@@ -133,10 +130,8 @@ public class ScheduleListView extends Activity {
 			// Find the next week day containing a class
 			// Iterate at most 7 times to avoid an infinite loop!
 			classes = studentClassSchedule.getClassesByDayOfWeek(days[dayofweek]);
-			if (classes.size() > 0)
+			if (classes.size() > 0)	
 				break;
-			else
-				dayofweek = (dayofweek + 1) % 7;
 		}
 
 		String place1[] = new String[classes.size()];
@@ -144,8 +139,8 @@ public class ScheduleListView extends Activity {
 		String cord1[] = new String[classes.size()];
 		for (int i = 0; i < classes.size(); i++)
 		{
+			
 			StudentClass sclass = classes.get(i);
-			// String ClassName=sclass.getName();
 			place1[i] = "Room # " + sclass.getRoom() + ", "
 					+ sclass.getBuilding();
 			time1[i] = sclass.getName() + " From " + sclass.getStarttime()
@@ -158,7 +153,7 @@ public class ScheduleListView extends Activity {
 					}
 	
 			}
-
+			
 		};
 		place = place1;
 		time = time1;
