@@ -94,8 +94,9 @@ public class ScheduleListView extends Activity {
 					&& Math.abs(velocityX) >= SWIPE_THRESHOLD_VELOCITY
 					&& Math.abs(dX) >= SWIPE_MIN_DISTANCE) {
 				if (dX > 0) {
-					dayofweek = (dayofweek - 1) % 7;
-					dayofweek = dayofweek * -1;
+					// seems like it doesn't like decrementing, so let's add 6 instead
+					dayofweek = (dayofweek + 6) % 7;
+					//dayofweek = dayofweek * -1;
 					Toast.makeText(getBaseContext(), dayStrings[dayofweek],
 							Toast.LENGTH_SHORT).show();
 					screen();
@@ -131,6 +132,7 @@ public class ScheduleListView extends Activity {
 			if (classes.size() > 0)
 				break;
 			else
+				// doesn't take into account right swipes
 				dayofweek = (dayofweek + 1) % 7;
 		}
 
