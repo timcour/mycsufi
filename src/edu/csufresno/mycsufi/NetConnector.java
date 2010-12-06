@@ -67,13 +67,14 @@ public class NetConnector {
 		}
 		
 		for (int i = 0; i < mStrings.size()/12; i++) {
+			// TODO: Catch null pointer exceptions
 			_classes.add( new StudentClass(
 					mStrings.get(i*12 + 2),  //"CSCI150",
-					mStrings.get(i*12 + 7),    //"Liu", 
-					mStrings.get(i*12 + 10),  //"102", 
-					mStrings.get(i*12 + 10),  //"Ag Sci", 
-					mStrings.get(i*12 + 9),  //"3:00pm", 
-					mStrings.get(i*12 + 9),  //"3:50pm", 
+					mStrings.get(i*12 + 7),    //"Liu",
+					mStrings.get(i*12 + 10).split("Room|Rm")[1],  //"102", 
+					mStrings.get(i*12 + 10).split("Room|Rm")[0],  //"Ag Sci", 
+					mStrings.get(i*12 + 9).split("-")[0],  //"3:00pm", 
+					mStrings.get(i*12 + 9).split("-")[1],  //"3:50pm", 
 					mStrings.get(i*12 + 8)  //"MoWe"));
 					));
 		}
