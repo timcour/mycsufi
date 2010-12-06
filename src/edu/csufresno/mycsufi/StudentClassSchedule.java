@@ -15,7 +15,7 @@ public class StudentClassSchedule {
 	
 	public void loadFromServer(String username, String password) {
 		NetConnector netConn = new NetConnector();
-		netConn.PullStudentSchedule(username, password);
+		netConn.pullStudentSchedule(username, password);
 		_classes = netConn.GetSchedule();						
 	}
 

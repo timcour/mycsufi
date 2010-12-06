@@ -58,7 +58,7 @@ public class MyCSUFi extends Activity {
         TextView myText = (TextView)findViewById(R.id.TextViewMain);
         
         NetConnector netConn = new NetConnector();
-        netConn.PullStudentSchedule("testuser", "testpass");
+        netConn.pullStudentSchedule("testuser", "testpass");
     }
     
     

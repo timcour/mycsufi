@@ -6,6 +6,9 @@
 package edu.csufresno.mycsufi;
 
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -30,12 +33,10 @@ public class NetConnector {
 		loginURLStr = "https://my.csufresno.edu/psp/mfs/?cmd=login&languageCd=ENG";
 		postUsernameStr = "userid";
 		postPasswordStr = "pwd";
-		postTimeoffsetStr = "timezoneOffset";
-		
-		// TestAuthentication("tcourrejou", "");
+		postTimeoffsetStr = "timezoneOffset";		
 	}
 	
-	public void PullStudentSchedule(String username, String password) {
+	public void pullStudentSchedule(String username, String password) {
 		// ****************************************************
 		// place holder functionality pending query being live.
 		// ****************************************************
@@ -43,10 +44,39 @@ public class NetConnector {
 		_classes.add( new StudentClass("CSCI115", "Seki", "108", "Mckee Fisk", "12:00pm", "12:50pm", "MoWeFr"));
 		_classes.add( new StudentClass("CSCI113", "Jin", "108", "Mckee Fisk", "8:00am", "8:50am", "MoWeFr"));
 		_classes.add( new StudentClass("MUSIC171", "Hooshmandrad", "167", "Music", "11:00am", "11:50am", "MoWeFr"));
+		
+		ClientPortal clientPortal = new ClientPortal();
+		clientPortal.authenticate(username, password);
+		clientPortal.executeClassScheduleForm();
+		clientPortal.executeClassScheduleHtml();
+		parseHtml(clientPortal.getScheduleHtml());
+		
 	}
 	
 	private void parseHtml(String scheduleHtml) {
+		// TODO use regular expressions to convert HTML to _classes
+		Pattern e = Pattern.compile(
+				".*(class='PSQRYRESULTSODDROW' >|class='PSQRYRESULTSODDROW' >)([A-Za-z0-9]*)(')");
+		Matcher m = e.matcher(scheduleHtml);
+		m.find();
+		int count = m.groupCount();
+		System.out.println("Matches Count: " + Integer.toString(count));
 		
+		// Example: one row of class schedule table --
+//		<tr><td scope='row' class='PSQRYRESULTSODDROW' >1</td> 
+//		<td class='PSQRYRESULTSODDROW' >2077</td> 
+//		<td class='PSQRYRESULTSODDROW' >Fall 2007</td> 
+//		<td class='PSQRYRESULTSODDROW' >CSCI 41</td> 
+//		<td class='PSQRYRESULTSODDROW' >Intr Data Struct</td> 
+//		<td class='PSQRYRESULTSODDROW'  align='right'>80573</td> 
+//		<td class='PSQRYRESULTSODDROW' >01</td> 
+//		<td class='PSQRYRESULTSODDROW' >LEC</td> 
+//		<td class='PSQRYRESULTSODDROW' >Ming Li</td> 
+//		<td class='PSQRYRESULTSODDROW' >MoWeFr</td> 
+//		<td class='PSQRYRESULTSODDROW' >11:00AM - 11:50AM</td> 
+//		<td class='PSQRYRESULTSODDROW' >McKee-Fisk Building Room 208</td> 
+//		<td class='PSQRYRESULTSODDROW' >08/27/2007 - 12/20/2007</td> 
+//		</tr> 
 	}
 	
 	private void parseCSV (String CSV) {

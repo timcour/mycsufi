@@ -93,7 +93,7 @@ public class ClientPortal {
 		icdummyValue = icdummy;
 	}
 	
-	public void executeClassScheduleCSV() {
+	public void executeClassScheduleHtml() {
 		PostForm post = new PostForm();
 		
 		// Prepare POST parameters
@@ -112,6 +112,10 @@ public class ClientPortal {
         scheduleHtml = postMethod(csvURL + icdummyValue, post.getNVPForm());
         
         System.out.println("Shutting down httpClient connection manager.");
+	}
+	
+	public void executeClassScheduleCSV() {
+		// TODO: Determine procedure for obtaining CSV version of Class Schedule.
 	}
 
 	private String postMethod(String url, List<NameValuePair> form) {
