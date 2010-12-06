@@ -72,8 +72,8 @@ public class ClientPortal {
 	public void authenticate(String username, String password) {
 		// sets cookies to save state as authenticated user.
 		PostForm post = new PostForm();
-		post.addnvp("userid", "tcourrejou");
-		post.addnvp("pwd", "");
+		post.addnvp("userid", username);
+		post.addnvp("pwd", password);
 		post.addnvp("timezoneOffset", getTimezoneOffset());
 		postMethod(authURL, post.getNVPForm());
 	}

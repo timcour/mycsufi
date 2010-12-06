@@ -37,41 +37,63 @@ public class NetConnector {
 	}
 	
 	public void pullStudentSchedule(String username, String password) {
-		// ****************************************************
-		// place holder functionality pending query being live.
-		// ****************************************************
-		_classes.add( new StudentClass("CSCI150", "Liu", "102", "Ag Sci", "3:00pm", "3:50pm", "MoWe"));
-		_classes.add( new StudentClass("CSCI115", "Seki", "108", "Mckee Fisk", "12:00pm", "12:50pm", "MoWeFr"));
-		_classes.add( new StudentClass("CSCI113", "Jin", "108", "Mckee Fisk", "8:00am", "8:50am", "MoWeFr"));
-		_classes.add( new StudentClass("MUSIC171", "Hooshmandrad", "167", "Music", "11:00am", "11:50am", "MoWeFr"));
 		
 		ClientPortal clientPortal = new ClientPortal();
 		clientPortal.authenticate(username, password);
+		clientPortal.printCookies();
 		clientPortal.executeClassScheduleForm();
 		clientPortal.executeClassScheduleHtml();
-		parseHtml(clientPortal.getScheduleHtml());
+		String cpHtml = clientPortal.getScheduleHtml();
+		try {
+			parseHtml(cpHtml);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 	
-	private void parseHtml(String scheduleHtml) {
+	private void parseHtml(String scheduleHtml) throws Exception {
+		ArrayList<String> mStrings = new ArrayList<String>();
+		System.out.println("HTML length: " + Integer.toString(scheduleHtml.length()));
+		// System.out.println(scheduleHtml);
 		// TODO use regular expressions to convert HTML to _classes
 		Pattern e = Pattern.compile(
-				".*(class='PSQRYRESULTSODDROW' >|class='PSQRYRESULTSODDROW' >)([A-Za-z0-9]*)(')");
+				"<td class='PSQRY.*>(.*?)</td>"
+				);
 		Matcher m = e.matcher(scheduleHtml);
-		m.find();
-		int count = m.groupCount();
-		System.out.println("Matches Count: " + Integer.toString(count));
+		while(m.find()) {
+			mStrings.add(m.group(1));			
+		}
 		
+		for (int i = 0; i < mStrings.size()/12; i++) {
+			_classes.add( new StudentClass(
+					mStrings.get(i*12 + 2),  //"CSCI150",
+					mStrings.get(i*12 + 7),    //"Liu", 
+					mStrings.get(i*12 + 10),  //"102", 
+					mStrings.get(i*12 + 10),  //"Ag Sci", 
+					mStrings.get(i*12 + 9),  //"3:00pm", 
+					mStrings.get(i*12 + 9),  //"3:50pm", 
+					mStrings.get(i*12 + 8)  //"MoWe"));
+					));
+		}
+		
+//		int count = m.groupCount();
+//		System.out.println("Matches Count: " + Integer.toString(count));
+//		for (int i = 0; i < m.groupCount(); i ++){
+//			System.out.println("match: " + m.group(i));
+//		}
+//		
 		// Example: one row of class schedule table --
 //		<tr><td scope='row' class='PSQRYRESULTSODDROW' >1</td> 
 //		<td class='PSQRYRESULTSODDROW' >2077</td> 
 //		<td class='PSQRYRESULTSODDROW' >Fall 2007</td> 
-//		<td class='PSQRYRESULTSODDROW' >CSCI 41</td> 
+//	2	<td class='PSQRYRESULTSODDROW' >CSCI 41</td> 
 //		<td class='PSQRYRESULTSODDROW' >Intr Data Struct</td> 
 //		<td class='PSQRYRESULTSODDROW'  align='right'>80573</td> 
 //		<td class='PSQRYRESULTSODDROW' >01</td> 
 //		<td class='PSQRYRESULTSODDROW' >LEC</td> 
-//		<td class='PSQRYRESULTSODDROW' >Ming Li</td> 
+//	7	<td class='PSQRYRESULTSODDROW' >Ming Li</td> 
 //		<td class='PSQRYRESULTSODDROW' >MoWeFr</td> 
 //		<td class='PSQRYRESULTSODDROW' >11:00AM - 11:50AM</td> 
 //		<td class='PSQRYRESULTSODDROW' >McKee-Fisk Building Room 208</td> 

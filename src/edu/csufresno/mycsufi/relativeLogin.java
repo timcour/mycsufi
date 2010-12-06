@@ -76,8 +76,8 @@ public class relativeLogin extends Activity {
 		Toast.makeText(relativeLogin.this,
 				"Fetching " + usertext.getText() + "'s Schedule",
 				Toast.LENGTH_SHORT).show();
-		studentClassSchedule.loadFromServer(usertext.toString(),
-				passwordtext.toString());
+		studentClassSchedule.loadFromServer(usertext.getText().toString(),
+				passwordtext.getText().toString());
 
 		if (studentClassSchedule.getClasses().size() > 0) {
 			Toast.makeText(relativeLogin.this, "Success.", Toast.LENGTH_SHORT)
