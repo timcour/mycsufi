@@ -36,17 +36,17 @@ public class StudentClassSchedule {
 	}
 	
 	public ArrayList<StudentClass> getClassesByDayOfWeek ( String day ) {
-		ArrayList<StudentClass> sclasses = this.getClasses();
-		
-		for( int i = 0; i < this.getClasses().size(); i++) 
+		ArrayList<StudentClass> sclasses = new ArrayList<StudentClass>();
+		StudentClass sClass;
+		for( int i = 0; i < _classes.size(); i++) 
 		{
-			if( sclasses.get(i).getDays().contains(day) )
+			sClass = _classes.get(i);
+			if( sClass.getDays().contains(day) )
 			{
-			return sclasses;
+				sclasses.add(sClass);
 			}
 		}
-		
-		return null;
+		return sclasses;
 	}
 	
 	public boolean isEmpty() {
