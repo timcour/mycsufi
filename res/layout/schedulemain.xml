@@ -14,7 +14,7 @@
 	></TextView>
 	
  	<ListView 
- 		android:id="@+id/ListView01" 
+ 		android:id="@+id/Schedule_List_View" 
  		android:layout_height="wrap_content"
  		android:layout_alignParentBottom="true"
 		android:layout_width="fill_parent">
