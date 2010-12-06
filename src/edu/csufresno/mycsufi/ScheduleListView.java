@@ -27,6 +27,8 @@ public class ScheduleListView extends Activity {
 	public static final String[] days = { "Mo", "Tu", "We", "Th", "Fr", "Sa", "Su" };
 	public static final String[] dayStrings = { "Monday", "Tuesday",
 			"Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
+	public static final String[] lookupBuilding={"Music","EW","dum","EE"};
+	public static final String[] lookupcord={"M","Ew","dum","Ee"};
 	public static String[] place;
 	public static String[] time;
 	public static String[] cord;
@@ -94,9 +96,8 @@ public class ScheduleListView extends Activity {
 					&& Math.abs(velocityX) >= SWIPE_THRESHOLD_VELOCITY
 					&& Math.abs(dX) >= SWIPE_MIN_DISTANCE) {
 				if (dX > 0) {
-					// seems like it doesn't like decrementing, so let's add 6 instead
-					dayofweek = (dayofweek + 6) % 7;
-					//dayofweek = dayofweek * -1;
+					dayofweek = (dayofweek - 1) % 7;
+					dayofweek = dayofweek * -1;
 					Toast.makeText(getBaseContext(), dayStrings[dayofweek],
 							Toast.LENGTH_SHORT).show();
 					screen();
@@ -132,24 +133,34 @@ public class ScheduleListView extends Activity {
 			if (classes.size() > 0)
 				break;
 			else
-				// doesn't take into account right swipes
 				dayofweek = (dayofweek + 1) % 7;
 		}
 
 		String place1[] = new String[classes.size()];
 		String time1[] = new String[classes.size()];
-		for (int i = 0; i < classes.size(); i++) {
+		String cord1[] = new String[classes.size()];
+		for (int i = 0; i < classes.size(); i++)
+		{
 			StudentClass sclass = classes.get(i);
 			// String ClassName=sclass.getName();
 			place1[i] = "Room # " + sclass.getRoom() + ", "
 					+ sclass.getBuilding();
 			time1[i] = sclass.getName() + " From " + sclass.getStarttime()
 					+ " To " + sclass.getEndtime() + " ";
+			for (int j=0;j<lookupBuilding.length;j++)
+			{
+				if (lookupBuilding[j].equals(sclass.getBuilding()))
+					{
+						cord1[i]= lookupcord[j];
+					}
+	
+			}
 
-			place = place1;
-			time = time1;
-			updateview();
 		};
+		place = place1;
+		time = time1;
+		cord=cord1;
+		updateview();
 	}
 
 	private void updateview() {
