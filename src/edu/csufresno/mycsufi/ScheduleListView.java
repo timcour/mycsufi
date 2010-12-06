@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Context;
+import android.gesture.GestureOverlayView;
 import android.os.Bundle;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
@@ -188,7 +189,9 @@ public class ScheduleListView extends Activity {
 					return false;
 			}
 		};
-		l1.setOnTouchListener(mGestureListener);
+		
+		GestureOverlayView gestures = (GestureOverlayView) findViewById(R.id.gestures);
+		gestures.setOnTouchListener(mGestureListener);
 	}
 
 	@Override
