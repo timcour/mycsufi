@@ -213,13 +213,21 @@ public class ClientPortal {
         }
 	}
 	
-	@SuppressWarnings("deprecation")
+	public ArrayList<String> getCookieStringArrayList() {
+		List<Cookie> cookies = httpClient.getCookieStore().getCookies();
+		ArrayList<String> cookieStrings = new ArrayList<String>();
+        if (cookies.isEmpty()) {
+            return cookieStrings;
+        } else {
+            for (int i = 0; i < cookies.size(); i++) {
+                cookieStrings.add(cookies.get(i).toString());
+            }
+        }
+        return cookieStrings;
+	}
+	
 	private String getTimezoneOffset() {
 		Date d = new Date();
-		
-		// TODO: getTimesoneOffset is depricated, so this should be reimplemented.
-		//int offset = Calendar.get(Calendar.ZONE_OFFSET<int>);
-		//return Integer.toString(offset);
 		return Integer.toString(d.getTimezoneOffset());
 	}
 	
