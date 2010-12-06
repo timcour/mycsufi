@@ -53,6 +53,38 @@ public class NetConnector {
 		
 	}
 	
+	private class ScheduleHtmlParser {
+		private String htmlString;
+		public ScheduleHtmlParser(String str){
+			htmlString = str;
+		}
+		
+	}
+	
+	private String getRoomNumber(String roomStr) {
+		Pattern e = Pattern.compile("[0-9]*?");
+		Matcher m = e.matcher(roomStr);
+		m.find();
+		try {
+			return m.group(1);
+		} catch (Exception exc) {			
+			return "-1";
+		}
+	}
+	
+	private String getBuildingName(String roomStr) {
+		Pattern e = Pattern.compile("[A-Za-z\\s]*?");
+		Matcher m = e.matcher(roomStr);
+		m.find();
+		try {
+			return m.group(1).split("Room|Rm")[0];
+		} catch (Exception exc) {			
+			return "-1";
+		}
+	}
+	
+	
+	
 	private void parseHtml(String scheduleHtml) throws Exception {
 		ArrayList<String> mStrings = new ArrayList<String>();
 		System.out.println("HTML length: " + Integer.toString(scheduleHtml.length()));
@@ -71,10 +103,10 @@ public class NetConnector {
 			_classes.add( new StudentClass(
 					mStrings.get(i*12 + 2),  //"CSCI150",
 					mStrings.get(i*12 + 7),    //"Liu",
-					mStrings.get(i*12 + 10).split("Room|Rm")[1],  //"102", 
-					mStrings.get(i*12 + 10).split("Room|Rm")[0],  //"Ag Sci", 
-					mStrings.get(i*12 + 9).split("-")[0],  //"3:00pm", 
-					mStrings.get(i*12 + 9).split("-")[1],  //"3:50pm", 
+					(mStrings.get(i*12 + 10)),  //"102", 
+					(mStrings.get(i*12 + 10)),  //"Ag Sci", 
+					mStrings.get(i*12 + 9),  //"3:00pm",.split("-")[0] 
+					mStrings.get(i*12 + 9),  //"3:50pm",.split("-")[1] 
 					mStrings.get(i*12 + 8)  //"MoWe"));
 					));
 		}
