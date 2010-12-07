@@ -23,7 +23,7 @@ public class MyCSUFiTest extends ActivityInstrumentationTestCase2<MyCSUFi> {
 	protected void setUp() throws Exception {
 		super.setUp();
 		mActivity = this.getActivity();
-		mView = (TextView) mActivity.findViewById(edu.csufresno.mycsufi.R.id.TextViewMain);
+		//mView = (TextView) mActivity.findViewById(edu.csufresno.mycsufi.R.id.TextViewMain);
 		db = new DBAdapter(mActivity.getBaseContext());
 	}
 	

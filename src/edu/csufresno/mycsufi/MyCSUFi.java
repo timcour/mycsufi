@@ -3,7 +3,10 @@ package edu.csufresno.mycsufi;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 import edu.csufresno.mycsufi.NetConnector;
 import edu.csufresno.mycsufi.relativeLogin;
 import edu.csufresno.mycsufi.DBAdapter;
@@ -20,20 +23,47 @@ public class MyCSUFi extends Activity {
         
         // Attempt Schedule load from DB
         studentClassSchedule.loadFromDB(this);        
+        final Button loginButton = (Button) findViewById(R.id.loginButton);
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(MyCSUFi.this, relativeLogin.class);
+                startActivity(intent);
+            }
+        });
+
+        final Button viewScheduleButton = (Button) findViewById(R.id.viewScheduleButton);
+        viewScheduleButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(MyCSUFi.this, ScheduleListView.class);
+                startActivity(intent);
+            }
+        });
+        
+        final Button campusMapButton = (Button) findViewById(R.id.campusMapButton);
+        campusMapButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+            	
+            	Toast.makeText(getBaseContext(), "link to campus map",
+        				Toast.LENGTH_SHORT).show();
+            	/*Intent intent = new Intent(MyCSUFi.this, MapView.class);
+                startActivity(intent);*/
+            }
+        });
+        
         
         if(studentClassSchedule.isEmpty()){
-        	Intent intent = new Intent(MyCSUFi.this, relativeLogin.class);
-        	startActivity(intent);
+        	viewScheduleButton.setEnabled(false);
         } else {
-        	Intent intent = new Intent(MyCSUFi.this, ScheduleListView.class);
-        	startActivity(intent);
+        	viewScheduleButton.setEnabled(true);
         }                
     }
+    
     
     // ***************************************************************
     // The following functions can be put into the JUnit test project
     // **************************************************************
-    private void printDbLoad () {
+  
+  /*  private void printDbLoad () {
     	String s;
     	setContentView(R.layout.main);
         TextView myText = (TextView)findViewById(R.id.TextViewMain);
@@ -44,13 +74,13 @@ public class MyCSUFi extends Activity {
     }
     
     private void RunTest() {
-    	/* Tim's Example code */
+    	 Tim's Example code 
         setContentView(R.layout.main);
         TextView myText = (TextView)findViewById(R.id.TextViewMain);
         
         NetConnector netConn = new NetConnector();
         netConn.pullStudentSchedule("testuser", "testpass");
-    }
+    }*/
     
     
 }

@@ -1,23 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    >
-	<TextView 
-		android:id="@+id/TextViewMain" 
-		android:layout_height="wrap_content" 
-		android:text="Schedule" 
-		android:textStyle="normal|bold" 
-		android:gravity="center_vertical|center_horizontal" 
-		android:layout_width="fill_parent"
-	></TextView>
-	
- 	<ListView 
- 		android:id="@+id/ListView01" 
- 		android:layout_height="wrap_content"
- 		android:layout_alignParentBottom="true"
-		android:layout_width="fill_parent">
- 	</ListView>
-    
-</LinearLayout>
+<RelativeLayout
+android:id="@+id/main_view"
+android:layout_width="fill_parent"
+android:layout_height="fill_parent"
+xmlns:android="http://schemas.android.com/apk/res/android"
+>
+<ImageView
+android:id="@+id/titleimage"
+android:src="@drawable/titleimage"
+android:layout_width="265px"
+android:layout_height="100px"
+android:layout_alignParentTop="true"
+android:layout_alignLeft="@+id/campusMapButton"
+>
+</ImageView>
+<Button
+android:id="@+id/campusMapButton"
+android:layout_width="265px"
+android:layout_height="68px"
+android:text="Campus Map"
+android:layout_below="@+id/viewScheduleButton"
+android:layout_alignLeft="@+id/viewScheduleButton"
+>
+</Button>
+<Button
+android:id="@+id/viewScheduleButton"
+android:layout_width="265px"
+android:layout_height="68px"
+android:text="View Schedule"
+android:layout_below="@+id/loginButton"
+android:layout_alignLeft="@+id/loginButton"
+>
+</Button>
+<Button
+android:id="@+id/loginButton"
+android:layout_width="265px"
+android:layout_height="68px"
+android:text="Login and Refresh"
+android:layout_centerVertical="true"
+android:layout_centerHorizontal="true"
+>
+</Button>
+</RelativeLayout>
