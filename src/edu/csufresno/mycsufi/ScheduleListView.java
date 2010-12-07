@@ -23,13 +23,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class ScheduleListView extends Activity {
-
+	private final static int RIGHT_SWIPE = 0;
+	private final static int LEFT_SWIPE = 1;
 	public int dayofweek = 0;
-	public static final String[] days = { "Mo", "Tu", "We", "Th", "Fr", "Sa", "Su" };
+	public static final String[] days = { "Mo", "Tu", "We", "Th", "Fr", "Sa",
+			"Su" };
 	public static final String[] dayStrings = { "Monday", "Tuesday",
 			"Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
-	public static final String[] lookupBuilding={"Music","EW","dum","EE"};
-	public static final String[] lookupcord={"M","Ew","dum","Ee"};
+	public static final String[] lookupBuilding = { "Music", "EW", "dum", "EE" };
+	public static final String[] lookupcord = { "M", "Ew", "dum", "Ee" };
 	public static String[] place;
 	public static String[] time;
 	public static String[] cord;
@@ -97,14 +99,13 @@ public class ScheduleListView extends Activity {
 					&& Math.abs(velocityX) >= SWIPE_THRESHOLD_VELOCITY
 					&& Math.abs(dX) >= SWIPE_MIN_DISTANCE) {
 				if (dX > 0) {
-					dayofweek = (dayofweek+ 5) % 6;
+					dayofweek = (dayofweek + 6) % 7;
 
 					Toast.makeText(getBaseContext(), dayStrings[dayofweek],
 							Toast.LENGTH_SHORT).show();
 					screen();
-				} 
-				else {
-					dayofweek = (dayofweek + 1) % 6;
+				} else {
+					dayofweek = (dayofweek + 1) % 7;
 					Toast.makeText(getBaseContext(), dayStrings[dayofweek],
 							Toast.LENGTH_SHORT).show();
 					screen();
@@ -126,51 +127,43 @@ public class ScheduleListView extends Activity {
 	private void screen() {
 
 		ArrayList<StudentClass> classes = new ArrayList<StudentClass>();
-		for (int i = 0; i < 7; i++) {
-			// Find the next week day containing a class
-			// Iterate at most 7 times to avoid an infinite loop!
-			classes = studentClassSchedule.getClassesByDayOfWeek(days[dayofweek]);
-			if (classes.size() > 0)	
-				break;
-		}
+		classes = studentClassSchedule.getClassesByDayOfWeek(days[dayofweek]);
 
 		String place1[] = new String[classes.size()];
 		String time1[] = new String[classes.size()];
 		String cord1[] = new String[classes.size()];
-		for (int i = 0; i < classes.size(); i++)
-		{
-			
+		for (int i = 0; i < classes.size(); i++) {
+
 			StudentClass sclass = classes.get(i);
 			place1[i] = "Room # " + sclass.getRoom() + ", "
 					+ sclass.getBuilding();
 			time1[i] = sclass.getName() + " From " + sclass.getStarttime()
 					+ " To " + sclass.getEndtime() + " ";
-			for (int j=0;j<lookupBuilding.length;j++)
-			{
-				if (lookupBuilding[j].equals(sclass.getBuilding()))
-					{
-						cord1[i]= lookupcord[j];
-					}
-	
+			for (int j = 0; j < lookupBuilding.length; j++) {
+				if (lookupBuilding[j].equals(sclass.getBuilding())) {
+					cord1[i] = lookupcord[j];
+				}
+
 			}
-			
-		};
+
+		}
+		;
 		place = place1;
 		time = time1;
-		cord=cord1;
+		cord = cord1;
 		updateview();
 	}
 
 	private void updateview() {
 		TextView myText = (TextView) findViewById(R.id.CurrentDay);
 		myText.setText(dayStrings[dayofweek]);
-		ListView l1 = (ListView) findViewById(R.id.Schedule_List_View);
-		l1.setAdapter(new EfficientAdapter(this));
+		ListView listView = (ListView) findViewById(R.id.Schedule_List_View);
+		listView.setAdapter(new EfficientAdapter(this));
 
-		l1.setOnItemClickListener(new OnItemClickListener() {
+		listView.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-				Toast.makeText(getBaseContext(), "You clcied "+ cord[arg2],
+				Toast.makeText(getBaseContext(), "You clcied " + cord[arg2],
 						Toast.LENGTH_LONG).show();
 			}
 		});
@@ -184,9 +177,10 @@ public class ScheduleListView extends Activity {
 					return false;
 			}
 		};
-		
+
 		GestureOverlayView gestures = (GestureOverlayView) findViewById(R.id.gestures);
 		gestures.setOnTouchListener(mGestureListener);
+		listView.setOnTouchListener(mGestureListener);
 	}
 
 	@Override
