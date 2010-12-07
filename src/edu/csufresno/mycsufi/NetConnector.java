@@ -66,7 +66,7 @@ public class NetConnector {
 		Matcher m = e.matcher(roomStr);
 		m.find();
 		try {
-			return m.group(1);
+			return m.group();
 		} catch (Exception exc) {			
 			return "-1";
 		}
@@ -77,7 +77,7 @@ public class NetConnector {
 		Matcher m = e.matcher(roomStr);
 		m.find();
 		try {
-			return m.group(1).split("Room|Rm")[0];
+			return m.group().split("Room|Rm")[0];
 		} catch (Exception exc) {			
 			return "-1";
 		}
