@@ -23,8 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class ScheduleListView extends Activity {
-	private final static int RIGHT_SWIPE = 0;
-	private final static int LEFT_SWIPE = 1;
+
 	public int dayofweek = 0;
 	public static final String[] days = { "Mo", "Tu", "We", "Th", "Fr", "Sa",
 			"Su" };
