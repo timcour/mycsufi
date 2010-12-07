@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.gesture.GestureOverlayView;
 import android.os.Bundle;
 import android.view.GestureDetector;
@@ -193,12 +194,10 @@ public class ScheduleListView extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.refresh:
-			Toast.makeText(this, "You pressed the icon and text!",
-					Toast.LENGTH_LONG).show();
-			this.finish();
-
-			break;
-		}
+			Intent intent = new Intent(ScheduleListView.this, relativeLogin.class);
+        	startActivity(intent);
+			break;}
+		
 		return true;
 	}
 
