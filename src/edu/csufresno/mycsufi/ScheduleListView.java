@@ -170,13 +170,21 @@ public class ScheduleListView extends Activity {
 		listView.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-			//	Toast.makeText(getBaseContext(), "You clicked " + cord[arg2],
-				//		Toast.LENGTH_LONG).show();
+			if (cord[arg2]==null)
+			{	Toast.makeText(getBaseContext(), "No Cordinates Found",
+						Toast.LENGTH_LONG).show();
+				Intent intent = new Intent(Intent.ACTION_VIEW);
+				startActivity(intent); 
+			}
+			else
+			{
 				Uri uri = Uri.parse(cord[arg2]); 
+			
 				Intent intent = new Intent(Intent.ACTION_VIEW, uri);
 				startActivity(intent); 
-				}
-		});
+			}
+			}
+			});
 
 		mGestureDetector = new GestureDetector(new MyGestureDetector());
 		mGestureListener = new View.OnTouchListener() {
