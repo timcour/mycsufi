@@ -21,6 +21,7 @@
 		android:textStyle="normal|bold" 
 		android:gravity="center_vertical|center_horizontal" 
 		android:layout_width="fill_parent"
+		android:textColor="#FFFFFF"
 
 	></TextView>
 	
@@ -28,7 +29,10 @@
  		android:id="@+id/Schedule_List_View" 
  		android:layout_height="wrap_content"
  		android:layout_alignParentBottom="true"
-		android:layout_width="fill_parent">
+		android:layout_width="fill_parent"
+		android:background="@drawable/seal"
+		android:cacheColorHint="#00000000"
+		>
  	</ListView>
 </LinearLayout>
 </android.gesture.GestureOverlayView>

@@ -6,7 +6,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.gesture.GestureOverlayView;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.LayoutInflater;
@@ -30,8 +32,8 @@ public class ScheduleListView extends Activity {
 			"Su" };
 	public static final String[] dayStrings = { "Monday", "Tuesday",
 			"Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
-	public static final String[] lookupBuilding = { "Music", "EW", "dum", "EE" };
-	public static final String[] lookupcord = { "M", "Ew", "dum", "Ee" };
+	public static final String[] lookupBuilding = { "Peters Business", "Engineering East", "dum", "EE" };
+	public static final String[] lookupcord = { "geo:36.812276,-119.746858?z=21", "Ew", "dum", "Ee" };
 	public static String[] place;
 	public static String[] time;
 	public static String[] cord;
@@ -135,12 +137,17 @@ public class ScheduleListView extends Activity {
 		for (int i = 0; i < classes.size(); i++) {
 
 			StudentClass sclass = classes.get(i);
-			place1[i] = "Room # " + sclass.getRoom() + ", "
+/*			This is the old code that was there, which i modified below.
+ * 			place1[i] = "Room # " + sclass.getRoom() + ", "
 					+ sclass.getBuilding();
 			time1[i] = sclass.getName() + " From " + sclass.getStarttime()
 					+ " To " + sclass.getEndtime() + " ";
+*/			
+			place1[i] = sclass.getRoom();
+			time1[i] = sclass.getName() + " " + sclass.getStarttime();
+			
 			for (int j = 0; j < lookupBuilding.length; j++) {
-				if (lookupBuilding[j].equals(sclass.getBuilding())) {
+				if (sclass.getRoom().contains(lookupBuilding[j])) {
 					cord1[i] = lookupcord[j];
 				}
 
@@ -163,9 +170,12 @@ public class ScheduleListView extends Activity {
 		listView.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-				Toast.makeText(getBaseContext(), "You clcied " + cord[arg2],
-						Toast.LENGTH_LONG).show();
-			}
+			//	Toast.makeText(getBaseContext(), "You clicked " + cord[arg2],
+				//		Toast.LENGTH_LONG).show();
+				Uri uri = Uri.parse(cord[arg2]); 
+				Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+				startActivity(intent); 
+				}
 		});
 
 		mGestureDetector = new GestureDetector(new MyGestureDetector());
