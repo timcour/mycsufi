@@ -25,8 +25,7 @@ android:layout_marginLeft="60dip"
 android:layout_marginRight="60dip"
 android:layout_centerVertical="true"
 android:layout_centerInParent="true"
-android:layout_below="@+id/mainseal"
-android:layout_marginTop="25dip"
+android:layout_above="@+id/viewScheduleButton"
 >
 </Button>
 <Button
@@ -37,7 +36,7 @@ android:layout_marginRight="60dip"
 android:layout_centerInParent="true"
 android:layout_height="wrap_content"
 android:text="View Schedule"
-android:layout_below="@+id/loginButton"
+android:layout_above="@+id/campusMapButton"
 >
 </Button>
 <Button
@@ -48,7 +47,8 @@ android:layout_marginRight="60dip"
 android:layout_height="wrap_content"
 android:layout_centerInParent="true"
 android:text="Campus Map"
-android:layout_below="@+id/viewScheduleButton"
+android:layout_alignParentBottom="true"
+android:layout_marginBottom="25dip"
 >
 </Button>
 </RelativeLayout>
