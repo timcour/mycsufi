@@ -27,6 +27,7 @@ public class NetConnector {
 	private String postUsernameStr;
 	private String postPasswordStr;
 	private String postTimeoffsetStr;
+	private String semester="Fall 2010";
 	
 	public NetConnector() {
 		_classes = new ArrayList<StudentClass>();
@@ -100,7 +101,8 @@ public class NetConnector {
 		
 		for (int i = 0; i < mStrings.size()/12; i++) {
 			// TODO: Catch null pointer exceptions
-			_classes.add( new StudentClass(
+
+					StudentClass newClass = new StudentClass(
 					mStrings.get(i*12 + 2),  //"CSCI150",
 					mStrings.get(i*12 + 7),    //"Liu",
 					(mStrings.get(i*12 + 10)),  //"102", 
@@ -108,7 +110,11 @@ public class NetConnector {
 					mStrings.get(i*12 + 9),  //"3:00pm",.split("-")[0] 
 					mStrings.get(i*12 + 9),  //"3:50pm",.split("-")[1] 
 					mStrings.get(i*12 + 8)  //"MoWe"));
-					));
+					);
+					if (mStrings.get(i*12 + 1).contains(semester)) {
+						_classes.add( newClass );
+					}
+				
 		}
 		
 //		int count = m.groupCount();
