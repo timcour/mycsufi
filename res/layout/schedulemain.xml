@@ -30,7 +30,7 @@
  		android:layout_height="wrap_content"
  		android:layout_alignParentBottom="true"
 		android:layout_width="fill_parent"
-		android:background="@drawable/seal"
+		android:background="@drawable/bg_seal"
 		android:cacheColorHint="#00000000"
 		>
  	</ListView>

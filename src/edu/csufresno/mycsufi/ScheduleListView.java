@@ -173,7 +173,8 @@ public class ScheduleListView extends Activity {
 			if (cord[arg2]==null)
 			{	Toast.makeText(getBaseContext(), "No Cordinates Found",
 						Toast.LENGTH_LONG).show();
-				Intent intent = new Intent(Intent.ACTION_VIEW);
+				Uri uri = Uri.parse("geo:36.812308,-119.742994?z=17");	
+				Intent intent = new Intent(Intent.ACTION_VIEW,uri);
 				startActivity(intent); 
 			}
 			else
