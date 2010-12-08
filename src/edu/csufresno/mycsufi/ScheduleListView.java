@@ -137,9 +137,9 @@ public class ScheduleListView extends Activity {
 		ArrayList<StudentClass> classes = new ArrayList<StudentClass>();
 		classes = studentClassSchedule.getClassesByDayOfWeek(days[dayofweek]);
 
-		String place1[] = new String[classes.size()];
-		String time1[] = new String[classes.size()];
-		String cord1[] = new String[classes.size()];
+		String tempplace[] = new String[classes.size()];
+		String temptime[] = new String[classes.size()];
+		String tempcord[] = new String[classes.size()];
 		for (int i = 0; i < classes.size(); i++) {
 
 			StudentClass sclass = classes.get(i);
@@ -149,21 +149,21 @@ public class ScheduleListView extends Activity {
 			time1[i] = sclass.getName() + " From " + sclass.getStarttime()
 					+ " To " + sclass.getEndtime() + " ";
 */			
-			place1[i] = sclass.getRoom();
-			time1[i] = sclass.getName() + " " + sclass.getStarttime();
+			tempplace[i] = sclass.getRoom();
+			temptime[i] = sclass.getName() + " " + sclass.getStarttime();
 			
 			for (int j = 0; j < lookupBuilding.length; j++) {
 				if (sclass.getRoom().contains(lookupBuilding[j])) {
-					cord1[i] = lookupcord[j];
+					tempcord[i] = lookupcord[j];
 				}
 
 			}
 
 		}
 		;
-		place = place1;
-		time = time1;
-		cord = cord1;
+		place = tempplace;
+		time = temptime;
+		cord = tempcord;
 		updateview();
 	}
 
