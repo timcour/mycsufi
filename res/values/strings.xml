@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="hello">Hello and welcome to the mobile way of viewing your CSU Fresno Class Schedule!</string>
-    <string name="app_name">MyCSUFi</string>
-    <string name="version">Ver. 0.2</string>
+    <string name="app_name">myFresnoState</string>
+    <string name="version">V0.2Beta</string>
     <string name="myClassScheduleText">None.</string>
 </resources>
