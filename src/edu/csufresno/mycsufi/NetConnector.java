@@ -27,18 +27,18 @@ public class NetConnector {
 	private String postUsernameStr;
 	private String postPasswordStr;
 	private String postTimeoffsetStr;
-	private String semester="Fall 2010";
-	
+	private String semester = "Fall 2010";
+
 	public NetConnector() {
 		_classes = new ArrayList<StudentClass>();
 		loginURLStr = "https://my.csufresno.edu/psp/mfs/?cmd=login&languageCd=ENG";
 		postUsernameStr = "userid";
 		postPasswordStr = "pwd";
-		postTimeoffsetStr = "timezoneOffset";		
+		postTimeoffsetStr = "timezoneOffset";
 	}
-	
+
 	public void pullStudentSchedule(String username, String password) {
-		
+
 		ClientPortal clientPortal = new ClientPortal();
 		clientPortal.authenticate(username, password);
 		clientPortal.printCookies();
@@ -51,116 +51,113 @@ public class NetConnector {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
-	
+
 	private class ScheduleHtmlParser {
 		private String htmlString;
-		public ScheduleHtmlParser(String str){
+
+		public ScheduleHtmlParser(String str) {
 			htmlString = str;
 		}
-		
+
 	}
-	
+
 	private String getRoomNumber(String roomStr) {
 		Pattern e = Pattern.compile("[0-9]*?");
 		Matcher m = e.matcher(roomStr);
 		m.find();
 		try {
 			return m.group();
-		} catch (Exception exc) {			
+		} catch (Exception exc) {
 			return "-1";
 		}
 	}
-	
+
 	private String getBuildingName(String roomStr) {
 		Pattern e = Pattern.compile("[A-Za-z\\s]*?");
 		Matcher m = e.matcher(roomStr);
 		m.find();
 		try {
 			return m.group().split("Room|Rm")[0];
-		} catch (Exception exc) {			
+		} catch (Exception exc) {
 			return "-1";
 		}
 	}
-	
-	
-	
+
 	private void parseHtml(String scheduleHtml) throws Exception {
 		ArrayList<String> mStrings = new ArrayList<String>();
-		System.out.println("HTML length: " + Integer.toString(scheduleHtml.length()));
+		System.out.println("HTML length: "
+				+ Integer.toString(scheduleHtml.length()));
 		// System.out.println(scheduleHtml);
 		// TODO use regular expressions to convert HTML to _classes
-		Pattern e = Pattern.compile(
-				"<td class='PSQRY.*>(.*?)</td>"
-				);
+		Pattern e = Pattern.compile("<td class='PSQRY.*>(.*?)</td>");
 		Matcher m = e.matcher(scheduleHtml);
-		while(m.find()) {
-			mStrings.add(m.group(1));			
+		while (m.find()) {
+			mStrings.add(m.group(1));
 		}
-		
-		for (int i = 0; i < mStrings.size()/12; i++) {
-			// TODO: Catch null pointer exceptions
 
-					StudentClass newClass = new StudentClass(
-					mStrings.get(i*12 + 2),  //"CSCI150",
-					mStrings.get(i*12 + 7),    //"Liu",
-					(mStrings.get(i*12 + 10)),  //"102", 
-					(mStrings.get(i*12 + 10)),  //"Ag Sci", 
-					mStrings.get(i*12 + 9),  //"3:00pm",.split("-")[0] 
-					mStrings.get(i*12 + 9),  //"3:50pm",.split("-")[1] 
-					mStrings.get(i*12 + 8)  //"MoWe"));
-					);
-					if (mStrings.get(i*12 + 1).contains(semester)) {
-						_classes.add( newClass );
-					}
-				
+		for (int i = 0; i < mStrings.size() / 12; i++) {
+			// TODO: Catch null pointer exceptions
+			StudentClass newClass = new StudentClass(mStrings.get(i * 12 + 2), // "CSCI150",
+					mStrings.get(i * 12 + 7), // "Liu",
+					(mStrings.get(i * 12 + 10)), // "102",
+					(mStrings.get(i * 12 + 10)), // "Ag Sci",
+					mStrings.get(i * 12 + 9), // "3:00pm",.split("-")[0]
+					mStrings.get(i * 12 + 9), // "3:50pm",.split("-")[1]
+					mStrings.get(i * 12 + 8) // "MoWe"));
+			);
+			if (mStrings.get(i * 12 + 1).contains(semester)) {
+				_classes.add(newClass);
+			}
 		}
-		
-//		int count = m.groupCount();
-//		System.out.println("Matches Count: " + Integer.toString(count));
-//		for (int i = 0; i < m.groupCount(); i ++){
-//			System.out.println("match: " + m.group(i));
-//		}
-//		
+
+		// int count = m.groupCount();
+		// System.out.println("Matches Count: " + Integer.toString(count));
+		// for (int i = 0; i < m.groupCount(); i ++){
+		// System.out.println("match: " + m.group(i));
+		// }
+		//
 		// Example: one row of class schedule table --
-//		<tr><td scope='row' class='PSQRYRESULTSODDROW' >1</td> 
-//		<td class='PSQRYRESULTSODDROW' >2077</td> 
-//		<td class='PSQRYRESULTSODDROW' >Fall 2007</td> 
-//	2	<td class='PSQRYRESULTSODDROW' >CSCI 41</td> 
-//		<td class='PSQRYRESULTSODDROW' >Intr Data Struct</td> 
-//		<td class='PSQRYRESULTSODDROW'  align='right'>80573</td> 
-//		<td class='PSQRYRESULTSODDROW' >01</td> 
-//		<td class='PSQRYRESULTSODDROW' >LEC</td> 
-//	7	<td class='PSQRYRESULTSODDROW' >Ming Li</td> 
-//		<td class='PSQRYRESULTSODDROW' >MoWeFr</td> 
-//		<td class='PSQRYRESULTSODDROW' >11:00AM - 11:50AM</td> 
-//		<td class='PSQRYRESULTSODDROW' >McKee-Fisk Building Room 208</td> 
-//		<td class='PSQRYRESULTSODDROW' >08/27/2007 - 12/20/2007</td> 
-//		</tr> 
+		// <tr><td scope='row' class='PSQRYRESULTSODDROW' >1</td>
+		// <td class='PSQRYRESULTSODDROW' >2077</td>
+		// <td class='PSQRYRESULTSODDROW' >Fall 2007</td>
+		// 2 <td class='PSQRYRESULTSODDROW' >CSCI 41</td>
+		// <td class='PSQRYRESULTSODDROW' >Intr Data Struct</td>
+		// <td class='PSQRYRESULTSODDROW' align='right'>80573</td>
+		// <td class='PSQRYRESULTSODDROW' >01</td>
+		// <td class='PSQRYRESULTSODDROW' >LEC</td>
+		// 7 <td class='PSQRYRESULTSODDROW' >Ming Li</td>
+		// <td class='PSQRYRESULTSODDROW' >MoWeFr</td>
+		// <td class='PSQRYRESULTSODDROW' >11:00AM - 11:50AM</td>
+		// <td class='PSQRYRESULTSODDROW' >McKee-Fisk Building Room 208</td>
+		// <td class='PSQRYRESULTSODDROW' >08/27/2007 - 12/20/2007</td>
+		// </tr>
 	}
-	
-	private void parseCSV (String CSV) {
+
+	private void parseCSV(String CSV) {
 		// Turn a CSV string into an ArrayList<StudentClass> object
 	}
-	
-	private ArrayList<ClientCookie> getMyCSUFresnoCookies ( ) {
+
+	private ArrayList<ClientCookie> getMyCSUFresnoCookies() {
 		ArrayList<ClientCookie> fsCookies = new ArrayList<ClientCookie>();
-		
+
 		return fsCookies;
 	}
-		
+
 	public ArrayList<StudentClass> GetSchedule() {
 		return _classes;
 	}
-	
+
 	private String GetTimezoneOffset() {
 		Date d = new Date();
-		return Integer.toString(d.getTimezoneOffset());		
+		return Integer.toString(d.getTimezoneOffset());
 	}
-	
+
 	private void TestAuthentication(String user, String pass) {
 		// Demonstrates non-cas authentication with my.csufresno.edu
+		// TODO: Take this function out, place some form of it in a test file
+		// to make sure we have connectivity.
 		try {
 			client = new DefaultHttpClient();
 			System.out.println("TimezoneOffset: " + GetTimezoneOffset());
@@ -169,16 +166,16 @@ public class NetConnector {
 			List<NameValuePair> form = new ArrayList<NameValuePair>();
 			form.add(new BasicNameValuePair(postUsernameStr, user));
 			form.add(new BasicNameValuePair(postPasswordStr, pass));
-			form.add(new BasicNameValuePair(postTimeoffsetStr, GetTimezoneOffset()));
-			post.setEntity( new UrlEncodedFormEntity(form, HTTP.UTF_8));
-			
+			form.add(new BasicNameValuePair(postTimeoffsetStr,
+					GetTimezoneOffset()));
+			post.setEntity(new UrlEncodedFormEntity(form, HTTP.UTF_8));
+
 			ResponseHandler<String> responseHandler = new BasicResponseHandler();
 			String responseBody = client.execute(post, responseHandler);
 			System.out.println(post.getAllHeaders().toString());
 			// careful, this next one is rough on eclipse
 			// System.out.println(responseBody);
-		}
-		catch (Throwable t) {
+		} catch (Throwable t) {
 			System.out.println(t);
 		}
 	}
