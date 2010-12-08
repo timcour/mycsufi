@@ -11,13 +11,14 @@
     android:gestureStrokeWidth="0.1">
 <ViewFlipper android:id="@+id/flipper"
            android:layout_width="fill_parent"
-           android:layout_height="fill_parent">    
+           android:layout_height="fill_parent"
+           >    
+<!--
 <LinearLayout 
 	xmlns:android="http://schemas.android.com/apk/res/android"
  	android:orientation="vertical" android:layout_width="fill_parent"
- 	android:layout_height="fill_parent"
- 	android:background="@drawable/bg_seal_l"
-	android:cacheColorHint="#00000000">
+ 	android:layout_height="fill_parent">
+
 		
 		<TextView 
 		android:id="@+id/CurrentDay" 
@@ -25,17 +26,60 @@
 		android:textStyle="normal|bold" 
 		android:gravity="center_vertical|center_horizontal" 
 		android:layout_width="fill_parent"
-		android:textColor="#000000"
+		android:textColor="#BB0000"
 
 	></TextView>
 	
  	<ListView 
  		android:id="@+id/Schedule_List_View" 
- 		android:layout_height="wrap_content"
+ 		android:layout_height="fill_parent"
  		android:layout_alignParentBottom="true"
 		android:layout_width="fill_parent"
 		>
  	</ListView>
 </LinearLayout>
+-->
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+ 	android:orientation="vertical" android:layout_width="fill_parent"
+ 	android:layout_height="fill_parent">
+
+    <ImageView   
+        android:id="@+id/scheduleBackground"
+        android:src="@drawable/bg_seal_l"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        />
+
+	<TextView 
+		android:id="@+id/CurrentDay" 
+		android:layout_height="wrap_content" 		 
+		android:textStyle="normal|bold" 
+		android:gravity="center_vertical|center_horizontal" 
+		android:layout_width="fill_parent"
+		android:textColor="#BB0000"
+	    android:layout_alignParentTop="true"
+	    android:background="#00000000"
+	    >
+	</TextView>
+	
+ 	<ListView 
+ 		android:id="@+id/Schedule_List_View" 
+ 		android:layout_height="fill_parent"
+ 		android:layout_alignParentBottom="true"
+		android:layout_width="fill_parent"
+	    android:layout_below="@+id/CurrentDay"
+	    android:background="#00000000"
+		>
+ 	</ListView>
+
+		
+
+
+</RelativeLayout>
+
+
+
 </ViewFlipper>
 </android.gesture.GestureOverlayView>

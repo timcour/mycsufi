@@ -3,31 +3,11 @@
 			xmlns:android="http://schemas.android.com/apk/res/android"
 			android:layout_width="fill_parent"
 			android:layout_height="fill_parent"
-			android:padding="6dip">		
+			android:padding="6dip"
+			>		
 	
-<TextView 	android:id="@+id/Time"
-			android:layout_width="260dip"
-			android:layout_height="wrap_content"
-			android:layout_alignParentLeft="true"
-			android:layout_alignParentTop="true"
-			android:layout_marginLeft="5dip"
-			android:text="@+id/Time"
-			android:textColor="#000000"
-			/>
-			
-<TextView   android:id="@+id/Place"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_alignParentBottom="false"
-			android:layout_alignParentLeft="true"
-			android:layout_marginLeft="5dip"
-			android:text="@+id/Place"
-			android:layout_below="@+id/Time"
-			android:textColor="#000000"
-			/>
-
 <ImageView
-        	android:src = "@drawable/nav2"
+        	android:src = "@drawable/nav3"
         	android:layout_width="wrap_content"
         	android:layout_height="wrap_content"
         	android:id="@+id/logo"
@@ -39,5 +19,27 @@
 			android:layout_marginRight="4dip"
 			android:layout_marginLeft="8dip"
             />
+
+<TextView 	android:id="@+id/Time"
+			android:layout_width="260dip"
+			android:layout_height="wrap_content"
+			android:layout_alignParentLeft="true"
+			android:layout_alignParentTop="true"
+			android:layout_marginLeft="5dip"
+			android:text="@+id/Time"
+			android:textColor="#000077"
+			/>
+			
+<TextView   android:id="@+id/Place"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignParentBottom="false"
+			android:layout_alignParentLeft="true"
+			android:layout_marginLeft="5dip"
+			android:text="@+id/Place"
+			android:layout_below="@+id/Time"
+			android:textColor="#000077"
+			/>
+
 
 </RelativeLayout>

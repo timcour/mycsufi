@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+<style name="bgTheme">
+
+    <item name="android:background">#FFFFFF</item>
+</style>
+<style name="seeThrough">
+
+    <item name="android:background">#00000000</item>
+</style>
+</resources>
