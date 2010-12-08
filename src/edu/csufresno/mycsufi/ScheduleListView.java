@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.gesture.GestureOverlayView;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.LayoutInflater;
@@ -18,26 +17,33 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ViewFlipper;
 
 public class ScheduleListView extends Activity {
 
 	public int dayofweek = 0;
-	public static final String[] days = { "Mo", "Tu", "We", "Th", "Fr", "Sa",
+	private static final String[] days = { "Mo", "Tu", "We", "Th", "Fr", "Sa",
 			"Su" };
-	public static final String[] dayStrings = { "Monday", "Tuesday",
+	private static final String[] dayStrings = { "Monday", "Tuesday",
 			"Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
-	public static final String[] lookupBuilding = { "Human Services", "Engineering East", "Engineering West", "Family Food","South Gym","North Gym","Social Science","McKee-Fisk","Industrial Tech","Ag Mechanic","Ag Operations","Public Safety","Science 2","Downing Planetarium","Planetarium Museum","Science","Peters Business","University Center","Conley Art","Joyal Admin","Smittcamp","Recreation Center","Peters Education","Lyles Center","Save Mart Center","Kremen Education","LAB School","Health enter","University High School","Music","Amphitheater","Speech Arts","Keats","University Center","Frank Thomas","Satellite Student Union","McLane Hall","Bookstore","University Student Union","University Dining Hall"};
-	public static final String[] lookupcord = { "geo:36.812905,-119.749582?z=21","geo:36.814434,-119.748353?z=21","geo:36.814378,-119.749534?z=21","geo:36.813047,-119.750413?z=21","geo:36.81258,-119.751562?z=21","geo:36.813512,-119.751509?z=21","geo:36.813869,-119.750398?z=21","geo:36.813851,-119.749379?z=21","geo:36.815445,-119.749856?z=21","geo:36.814534,-119.746745?z=21","geo:36.815458,-119.746917?z=21","geo:36.815513,-119.748118?z=21","geo:36.814689,-119.743601?z=21","geo:36.814534,-119.744358?z=21","geo:36.814848,-119.744277?z=21","geo:36.813581,-119.743998?z=21","geo: 36.812583,-119.743665?z=21","geo:36.812901,-119.743091?z=21","geo:36.81185,-119.744009?z=21","geo:36.811063,-119.744604?z=21","geo:36.809998,-119.742935?z=21","geo:36.809771,-119.739937?z=21","geo:36.809272,-119.740199?z=21","geo:36.809289,-119.739572?z=21","geo:36.809688,-119.738515?z=21","geo:36.809621,-119.746659?z=21","geo:36.809577,-119.748064?z=21","geo:36.809555,-119.749271?z=21","geo:36.810458,-119.747716?z=21","geo:36.810785,-119.746262?z=21","geo:36.811176,-119.74734?z=21","geo:36.811713,-119.746428?z=21","geo:36.811694,-119.747747?z=21","geo:36.811979,-119.748542?z=21","geo:36.812718,-119.746466?z=21","geo:36.81337,-119.74527?z=21","geo:36.813482,-119.74792?z=21","geo:36.812729,-119.747726?z=21","geo:36.81273,-119.748445?z=21","geo:36.811421,-119.75102?z=21"};
-	public static String[] place;
-	public static String[] time;
-	public static String[] cord;
+	private static final String[] lookupBuilding = { "Human Services", "Engineering East", "Engineering West", "Family Food","South Gym","North Gym","Social Science","McKee-Fisk","Industrial Tech","Ag Mechanic","Ag Operations","Public Safety","Science 2","Downing Planetarium","Planetarium Museum","Science","Peters Business","University Center","Conley Art","Joyal Admin","Smittcamp","Recreation Center","Peters Education","Lyles Center","Save Mart Center","Kremen Education","LAB School","Health enter","University High School","Music","Amphitheater","Speech Arts","Keats","University Center","Frank Thomas","Satellite Student Union","McLane Hall","Bookstore","University Student Union","University Dining Hall"};
+	private static final String[] lookupcord = { "geo:36.812905,-119.749582?z=21","geo:36.814434,-119.748353?z=21","geo:36.814378,-119.749534?z=21","geo:36.813047,-119.750413?z=21","geo:36.81258,-119.751562?z=21","geo:36.813512,-119.751509?z=21","geo:36.813869,-119.750398?z=21","geo:36.813851,-119.749379?z=21","geo:36.815445,-119.749856?z=21","geo:36.814534,-119.746745?z=21","geo:36.815458,-119.746917?z=21","geo:36.815513,-119.748118?z=21","geo:36.814689,-119.743601?z=21","geo:36.814534,-119.744358?z=21","geo:36.814848,-119.744277?z=21","geo:36.813581,-119.743998?z=21","geo: 36.812583,-119.743665?z=21","geo:36.812901,-119.743091?z=21","geo:36.81185,-119.744009?z=21","geo:36.811063,-119.744604?z=21","geo:36.809998,-119.742935?z=21","geo:36.809771,-119.739937?z=21","geo:36.809272,-119.740199?z=21","geo:36.809289,-119.739572?z=21","geo:36.809688,-119.738515?z=21","geo:36.809621,-119.746659?z=21","geo:36.809577,-119.748064?z=21","geo:36.809555,-119.749271?z=21","geo:36.810458,-119.747716?z=21","geo:36.810785,-119.746262?z=21","geo:36.811176,-119.74734?z=21","geo:36.811713,-119.746428?z=21","geo:36.811694,-119.747747?z=21","geo:36.811979,-119.748542?z=21","geo:36.812718,-119.746466?z=21","geo:36.81337,-119.74527?z=21","geo:36.813482,-119.74792?z=21","geo:36.812729,-119.747726?z=21","geo:36.81273,-119.748445?z=21","geo:36.811421,-119.75102?z=21"};
+	private static String[] place;
+	private static String[] time;
+	private static String[] cord;
+	private ViewFlipper dayflipper;
 
+	
+	
 	StudentClassSchedule studentClassSchedule = new StudentClassSchedule();
 
 	public static class EfficientAdapter extends BaseAdapter {
@@ -102,14 +108,15 @@ public class ScheduleListView extends Activity {
 					&& Math.abs(dX) >= SWIPE_MIN_DISTANCE) {
 				if (dX > 0) {
 					dayofweek = (dayofweek + 6) % 7;
-
-					Toast.makeText(getBaseContext(), dayStrings[dayofweek],
-							Toast.LENGTH_SHORT).show();
+					dayflipper.setInAnimation(inFromLeftAnimation());
+	                dayflipper.setOutAnimation(outToRightAnimation());
+	                dayflipper.showPrevious();
 					screen();
 				} else {
 					dayofweek = (dayofweek + 1) % 7;
-					Toast.makeText(getBaseContext(), dayStrings[dayofweek],
-							Toast.LENGTH_SHORT).show();
+					dayflipper.setInAnimation(inFromRightAnimation());
+					dayflipper.setOutAnimation(outToLeftAnimation());
+					dayflipper.showNext();
 					screen();
 				}
 				return true;
@@ -123,6 +130,7 @@ public class ScheduleListView extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.schedulemain);
 		studentClassSchedule.loadFromDB(this);
+		dayflipper = (ViewFlipper) findViewById(R.id.flipper);
 		screen();
 	}// end off on create
 
@@ -166,7 +174,6 @@ public class ScheduleListView extends Activity {
 		myText.setText(dayStrings[dayofweek]);
 		ListView listView = (ListView) findViewById(R.id.Schedule_List_View);
 		listView.setAdapter(new EfficientAdapter(this));
-
 		listView.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
@@ -219,5 +226,68 @@ public class ScheduleListView extends Activity {
 		
 		return true;
 	}
+	
+private Animation inFromRightAnimation() {
+		 
+        Animation inFromRight = new TranslateAnimation(
+                        Animation.RELATIVE_TO_PARENT, +1.0f,
+                        Animation.RELATIVE_TO_PARENT, 0.0f,
+                        Animation.RELATIVE_TO_PARENT, 0.0f,
+                        Animation.RELATIVE_TO_PARENT, 0.0f);
+        inFromRight.setDuration(200);
+        inFromRight.setInterpolator(new AccelerateInterpolator());
+        return inFromRight;
+}
 
+private Animation outToLeftAnimation() {
+        Animation outtoLeft = new TranslateAnimation(
+                        Animation.RELATIVE_TO_PARENT, 0.0f,
+                        Animation.RELATIVE_TO_PARENT, -1.0f,
+                        Animation.RELATIVE_TO_PARENT, 0.0f,
+                        Animation.RELATIVE_TO_PARENT, 0.0f);
+        outtoLeft.setDuration(200);
+        outtoLeft.setInterpolator(new AccelerateInterpolator());
+        return outtoLeft;
+}
+
+private Animation inFromLeftAnimation() {
+        Animation inFromLeft = new TranslateAnimation(
+                        Animation.RELATIVE_TO_PARENT, -1.0f,
+                        Animation.RELATIVE_TO_PARENT, 0.0f,
+                        Animation.RELATIVE_TO_PARENT, 0.0f,
+                        Animation.RELATIVE_TO_PARENT, 0.0f);
+        inFromLeft.setDuration(200);
+        inFromLeft.setInterpolator(new AccelerateInterpolator());
+        return inFromLeft;
+}
+
+private Animation outToRightAnimation() {
+        Animation outtoRight = new TranslateAnimation(
+                        Animation.RELATIVE_TO_PARENT, 0.0f,
+                        Animation.RELATIVE_TO_PARENT, +1.0f,
+                        Animation.RELATIVE_TO_PARENT, 0.0f,
+                        Animation.RELATIVE_TO_PARENT, 0.0f);
+        outtoRight.setDuration(200);
+        outtoRight.setInterpolator(new AccelerateInterpolator());
+        return outtoRight;
+}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }// end of everything

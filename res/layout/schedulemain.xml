@@ -9,7 +9,9 @@
     android:orientation="vertical"
     android:gestureColor="#FF0000"
     android:gestureStrokeWidth="0.1">
-    
+<ViewFlipper android:id="@+id/flipper"
+           android:layout_width="fill_parent"
+           android:layout_height="fill_parent">    
 <LinearLayout 
 	xmlns:android="http://schemas.android.com/apk/res/android"
  	android:orientation="vertical" android:layout_width="fill_parent"
@@ -30,9 +32,10 @@
  		android:layout_height="wrap_content"
  		android:layout_alignParentBottom="true"
 		android:layout_width="fill_parent"
-		android:background="@drawable/bg_seal"
+		android:background="@drawable/bg_seal_l"
 		android:cacheColorHint="#00000000"
 		>
  	</ListView>
 </LinearLayout>
+</ViewFlipper>
 </android.gesture.GestureOverlayView>
