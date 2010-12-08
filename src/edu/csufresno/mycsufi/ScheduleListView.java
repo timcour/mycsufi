@@ -172,6 +172,7 @@ public class ScheduleListView extends Activity {
 		myText.setText(dayStrings[dayofweek]);
 		ListView listView = (ListView) findViewById(R.id.Schedule_List_View);
 		listView.setAdapter(new EfficientAdapter(this));
+		
 		listView.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
@@ -269,23 +270,5 @@ public class ScheduleListView extends Activity {
         outtoRight.setInterpolator(new AccelerateInterpolator());
         return outtoRight;
 }
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-}// end of everything
+		
+};// end of everything
