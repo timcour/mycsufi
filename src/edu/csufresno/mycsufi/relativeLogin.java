@@ -1,7 +1,5 @@
 package edu.csufresno.mycsufi;
 
-import edu.csufresno.mycsufi.MyCSUFi;
-import edu.csufresno.mycsufi.DBAdapter;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -14,7 +12,6 @@ import android.view.View.OnKeyListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-//import android.widget.ImageView;
 import android.widget.Toast;
 
 public class relativeLogin extends Activity {

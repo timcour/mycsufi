@@ -1,0 +1,60 @@
+building name lat, long
+
+Professional Human Services 36.812905,-119.749582
+Engineering East 36.814434,-119.748353
+Engineering West 36.814378,-119.749534
+Family and Food Science 36.813047,-119.750413
+South Gym 36.81258,-119.751562
+North Gym 36.813512,-119.751509
+Social Science @36.813869,-119.750398
+Mckee Fisk @36.813851,-119.749379
+Grosse Industrial Tech @36.815445,-119.749856
+Ag Mechanics @36.814534,-119.746745
+Ag Operations @36.815458,-119.746917
+Public Safety @36.815513,-119.748118
+Science II @36.814689,-119.743601
+Downing Planetarium @36.814534,-119.744358
+Planetarium Museum @36.814848,-119.744277
+Science  @36.813581,-119.743998
+Peters Business @36.812583,-119.743665
+University Business Center @36.812901,-119.743091
+Conley Art @36.81185,-119.744009
+Joyal Admin @36.811063,-119.744604
+Smittcamp Alumni House @36.809998,-119.742935
+Student Recreation Center @36.809771,-119.739937
+Peters Education Building @36.809272,-119.740199
+Lyles Center @36.809289,-119.739572
+Save Mart Center @36.809688,-119.738515
+Kremen School of Education and Human Development @36.809621,-119.746659
+Lab School @36.809577,-119.748064
+Health Center @36.809555,-119.749271
+University High School @36.810458,-119.747716
+Music @36.810785,-119.746262
+Amphitheater @36.811176,-119.74734
+Speech Arts @36.811713,-119.746428
+Keats @36.811694,-119.747747
+University Center @36.811979,-119.748542
+Frank W. Thomas @36.812718,-119.746466
+Satellite Student Union @36.81337,-119.74527
+Mclane Hall @36.813482,-119.74792
+Bookstore @36.812729,-119.747726
+University Student Union @36.81273,-119.748445
+University Dining Hall @36.811421,-119.75102
+
+
+
+http://maps.google.com/maps/ms?ie=UTF&msa=0&msid=
+112075877880136942183.00049544fc6c8971596b3
+
+
+
+<com.google.android.maps.MapView
+	android:id="@+id/myMapView"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:enabled="true"
+	android:clickable="true"
+	android:apiKey="0Fj_zSE0FFSwyayTfHxaYwA7mh_LT5J_IigKT4g"
+	/>
+
+        <uses-library android:name="com.google.android.maps"/>

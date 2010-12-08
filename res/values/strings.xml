@@ -4,4 +4,6 @@
     <string name="app_name">myFresnoState</string>
     <string name="version">v0.2beta</string>
     <string name="myClassScheduleText">None.</string>
+    <string name="apikey_justin">0Fj_zSE0FFSwyayTfHxaYwA7mh_LT5J_IigKT4g</string>
+    <string name="apikey_mark">0Mh--AnT7h7nJlYzdqf8InPjLrIKEwNOer8WAZw</string>
 </resources>

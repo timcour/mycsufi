@@ -47,6 +47,8 @@ public class MyCSUFi extends Activity {
         				Toast.LENGTH_SHORT).show();
             	/*Intent intent = new Intent(MyCSUFi.this, MapView.class);
                 startActivity(intent);*/
+            	Intent intent = new Intent(MyCSUFi.this, Where.class);
+                startActivity(intent);
             }
         });
         
