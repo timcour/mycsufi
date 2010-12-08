@@ -106,14 +106,14 @@ public class ScheduleListView extends Activity {
 					&& Math.abs(dX) >= SWIPE_MIN_DISTANCE) {
 				if (dX > 0) {
 					dayofweek = (dayofweek + 6) % 7;
-					dayflipper.setInAnimation(inFromLeftAnimation());
 	                dayflipper.setOutAnimation(outToRightAnimation());
+					dayflipper.setInAnimation(inFromLeftAnimation());
 	                dayflipper.showPrevious();
 					screen();
 				} else {
 					dayofweek = (dayofweek + 1) % 7;
-					dayflipper.setInAnimation(inFromRightAnimation());
 					dayflipper.setOutAnimation(outToLeftAnimation());
+					dayflipper.setInAnimation(inFromRightAnimation());
 					dayflipper.showNext();
 					screen();
 				}
@@ -226,6 +226,7 @@ public class ScheduleListView extends Activity {
 		return true;
 	}
 	
+	// animations for next screen, moves the current screen out to	left and moves the next screen in from right
 	private Animation inFromRightAnimation() {
 		 
         Animation inFromRight = new TranslateAnimation(
@@ -248,7 +249,7 @@ public class ScheduleListView extends Activity {
         outtoLeft.setInterpolator(new AccelerateInterpolator());
         return outtoLeft;
 }
-
+	// animations for previous screen, moves the current screen out to right and moves the previous screen in from left
 	private Animation inFromLeftAnimation() {
         Animation inFromLeft = new TranslateAnimation(
                         Animation.RELATIVE_TO_PARENT, -1.0f,
