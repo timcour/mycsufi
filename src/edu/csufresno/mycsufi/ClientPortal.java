@@ -111,7 +111,7 @@ public class ClientPortal {
         
         scheduleHtml = postMethod(csvURL + icdummyValue, post.getNVPForm());
         
-        System.out.println("Shutting down httpClient connection manager.");
+        if (Debug) System.out.println("Shutting down httpClient connection manager.");
 	}
 	
 	public void executeClassScheduleCSV() {
@@ -123,6 +123,9 @@ public class ClientPortal {
 		String ret = "";
 		try {
 			hp.setEntity(new UrlEncodedFormEntity(form, HTTP.UTF_8));
+			
+			// These headers are likely not needed.
+			// TODO: Remove unneeded html headers.
 			hp.setHeader("Host", "cmsweb.csufresno.edu");
 			hp.setHeader("Referer", "https://cmsweb.csufresno.edu/psc/HFRRPT/EMPLOYEE/HRMS/q/?ICAction=ICQryNameURL=PUBLIC.FR_SS_CLASS_SCHED_MOBILE&");
 			hp.setHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");

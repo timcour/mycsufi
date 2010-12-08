@@ -22,29 +22,29 @@ import org.apache.http.cookie.ClientCookie;
 
 public class NetConnector {
 	private ArrayList<StudentClass> _classes;
-	private DefaultHttpClient client = null;
+	private DefaultHttpClient client = null;	
 	private String loginURLStr;
 	private String postUsernameStr;
 	private String postPasswordStr;
 	private String postTimeoffsetStr;
+	
+	// TODO: change string match to code instead of semester name.
 	private String semester = "Fall 2010";
-
+	private boolean Debug = false;
+	
 	public NetConnector() {
 		_classes = new ArrayList<StudentClass>();
-		loginURLStr = "https://my.csufresno.edu/psp/mfs/?cmd=login&languageCd=ENG";
-		postUsernameStr = "userid";
-		postPasswordStr = "pwd";
-		postTimeoffsetStr = "timezoneOffset";
 	}
 
 	public void pullStudentSchedule(String username, String password) {
 
 		ClientPortal clientPortal = new ClientPortal();
 		clientPortal.authenticate(username, password);
-		clientPortal.printCookies();
+		if (Debug) clientPortal.printCookies();
 		clientPortal.executeClassScheduleForm();
-		clientPortal.executeClassScheduleHtml();
-		String cpHtml = clientPortal.getScheduleHtml();
+		String cpHtml = clientPortal.getResponseString();
+//		clientPortal.executeClassScheduleHtml();
+//		String cpHtml = clientPortal.getScheduleHtml();
 		try {
 			parseHtml(cpHtml);
 		} catch (Exception e) {

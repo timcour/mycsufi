@@ -2,6 +2,6 @@
 <resources>
     <string name="hello">Hello and welcome to the mobile way of viewing your CSU Fresno Class Schedule!</string>
     <string name="app_name">myFresnoState</string>
-    <string name="version">V0.2Beta</string>
+    <string name="version">v0.2beta</string>
     <string name="myClassScheduleText">None.</string>
 </resources>

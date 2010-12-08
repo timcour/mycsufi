@@ -12,14 +12,14 @@ public class StudentClassSchedule {
 	public StudentClassSchedule() {
 		_classes = new ArrayList<StudentClass>();
 	}
-	
+
 	public void loadFromServer(String username, String password) {
 		NetConnector netConn = new NetConnector();
 		netConn.pullStudentSchedule(username, password);
-		_classes = netConn.GetSchedule();						
+		_classes = netConn.GetSchedule();
 	}
 
-	public void loadFromDB (Context _context) {
+	public void loadFromDB(Context _context) {
 		DBAdapter dba = new DBAdapter(_context);
 		try {
 			dba.open();
@@ -28,29 +28,40 @@ public class StudentClassSchedule {
 		} catch (Throwable t) {
 			System.out.println(t);
 			_classes = new ArrayList<StudentClass>();
-		}		
+		}
 	}
-	
+
 	public ArrayList<StudentClass> getClasses() {
 		return _classes;
 	}
-	
-	public ArrayList<StudentClass> getClassesByDayOfWeek ( String day ) {
+
+	public ArrayList<StudentClass> getClassesByDayOfWeek(String day) {
 		ArrayList<StudentClass> sclasses = new ArrayList<StudentClass>();
 		StudentClass sClass;
-		for( int i = 0; i < _classes.size(); i++) 
-		{
+		for (int i = 0; i < _classes.size(); i++) {
 			sClass = _classes.get(i);
-			if( sClass.getDays().contains(day) )
-			{
+			if (sClass.getDays().contains(day)) {
 				sclasses.add(sClass);
 			}
 		}
 		return sclasses;
 	}
 	
+	public ArrayList<StudentClass> getClassesByTermDayOfWeek(String term, String day) {
+		ArrayList<StudentClass> sclasses = new ArrayList<StudentClass>();
+		StudentClass sClass;
+		for (int i = 0; i < _classes.size(); i++) {
+			sClass = _classes.get(i);
+			if (sClass.getDays().contains(day) && sClass.getTerm().contains(term)) {
+				sclasses.add(sClass);
+			}
+		}
+		return sclasses;
+	}
+
 	public boolean isEmpty() {
-		if (_classes.size() > 0) return false;
+		if (_classes.size() > 0)
+			return false;
 		return true;
 	}
 }

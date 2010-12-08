@@ -9,6 +9,7 @@ public class StudentClass {
 	private String Starttime;
 	private String Endtime;
 	private String Days;
+	private String Term;
 
 	public StudentClass(
 			// there should probably be default values.
@@ -21,8 +22,17 @@ public class StudentClass {
 		Starttime = start;
 		Endtime = end;
 		Days = days;
+		Term = "";
 	}
-
+	
+	public void setTerm(String term) {
+		Term = term;
+	}
+	
+	public String getTerm() {		
+		return Term;
+	}
+	
 	public String getName() {
 		return Name;
 	}

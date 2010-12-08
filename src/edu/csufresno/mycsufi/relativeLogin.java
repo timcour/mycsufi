@@ -3,6 +3,8 @@ package edu.csufresno.mycsufi;
 import edu.csufresno.mycsufi.MyCSUFi;
 import edu.csufresno.mycsufi.DBAdapter;
 import android.app.Activity;
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -16,8 +18,12 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class relativeLogin extends Activity {
+	
+	private static final int DIALOG_GETCLASS_KEY = 0;
+	
 	private StudentClassSchedule studentClassSchedule = new StudentClassSchedule();
 	private DBAdapter dba = new DBAdapter(this);
+	private String username = "";
 
 	/** Called when the activity is first created. */
 	@Override
@@ -73,15 +79,24 @@ public class relativeLogin extends Activity {
 	}
 
 	private void fetchSchedule(EditText usertext, EditText passwordtext) {
+		username = usertext.getText().toString();
 		Toast.makeText(relativeLogin.this,
-				"Fetching " + usertext.getText() + "'s Schedule",
+				"Fetching " + username + "'s Schedule",
 				Toast.LENGTH_SHORT).show();
-		studentClassSchedule.loadFromServer(usertext.getText().toString(),
+		
+		//showDialog(DIALOG_GETCLASS_KEY); 
+		studentClassSchedule.loadFromServer(username.toString(),
 				passwordtext.getText().toString());
+		//dismissDialog(DIALOG_GETCLASS_KEY);
 
 		if (studentClassSchedule.getClasses().size() > 0) {
 			Toast.makeText(relativeLogin.this, "Success.", Toast.LENGTH_SHORT)
 					.show();
+			
+			// Drop schedule table if existing
+			// dba.dropStudentClassTable(); functionality not yet provided.
+			
+			// Create table and insert new schedule.
 			dba.open();
 			dba.insert_ToDatabase(dba, studentClassSchedule.getClasses());
 			dba.close();
@@ -92,5 +107,13 @@ public class relativeLogin extends Activity {
 					Toast.LENGTH_SHORT).show();
 		}
 	}
-
+	
+	@Override
+    protected Dialog onCreateDialog(int id) {
+		ProgressDialog dialog = new ProgressDialog(this);
+        dialog.setMessage("Fetching " + username + "'s Schedule");
+        dialog.setIndeterminate(true);
+        dialog.setCancelable(true);
+        return dialog;
+    }
 }
