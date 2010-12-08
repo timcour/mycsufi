@@ -3,42 +3,52 @@
 android:id="@+id/main_view"
 android:layout_width="fill_parent"
 android:layout_height="fill_parent"
+android:background="#ffffffff"
 xmlns:android="http://schemas.android.com/apk/res/android"
 >
-<ImageView
-android:id="@+id/titleimage"
-android:src="@drawable/titleimage"
-android:layout_width="265px"
-android:layout_height="100px"
-android:layout_alignParentTop="true"
-android:layout_alignLeft="@+id/campusMapButton"
->
-</ImageView>
+    <ImageView   
+        android:id="@+id/mainseal"
+        android:src="@drawable/seal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="25dip"
+         />
+
 <Button
-android:id="@+id/campusMapButton"
-android:layout_width="265px"
-android:layout_height="68px"
-android:text="Campus Map"
-android:layout_below="@+id/viewScheduleButton"
-android:layout_alignLeft="@+id/viewScheduleButton"
+android:id="@+id/loginButton"
+android:layout_width="fill_parent"
+android:layout_height="wrap_content"
+android:text="Login and Refresh"
+android:layout_marginLeft="60dip"
+android:layout_marginRight="60dip"
+android:layout_centerVertical="true"
+android:layout_centerInParent="true"
+android:layout_below="@+id/mainseal"
+android:layout_marginTop="25dip"
 >
 </Button>
 <Button
 android:id="@+id/viewScheduleButton"
-android:layout_width="265px"
-android:layout_height="68px"
+android:layout_width="fill_parent"
+android:layout_marginLeft="60dip"
+android:layout_marginRight="60dip"
+android:layout_centerInParent="true"
+android:layout_height="wrap_content"
 android:text="View Schedule"
 android:layout_below="@+id/loginButton"
-android:layout_alignLeft="@+id/loginButton"
 >
 </Button>
 <Button
-android:id="@+id/loginButton"
-android:layout_width="265px"
-android:layout_height="68px"
-android:text="Login and Refresh"
-android:layout_centerVertical="true"
-android:layout_centerHorizontal="true"
+android:id="@+id/campusMapButton"
+android:layout_width="fill_parent"
+android:layout_marginLeft="60dip"
+android:layout_marginRight="60dip"
+android:layout_height="wrap_content"
+android:layout_centerInParent="true"
+android:text="Campus Map"
+android:layout_below="@+id/viewScheduleButton"
 >
 </Button>
 </RelativeLayout>
