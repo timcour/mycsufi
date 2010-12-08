@@ -42,8 +42,6 @@ public class ScheduleListView extends Activity {
 	private static String[] cord;
 	private ViewFlipper dayflipper;
 
-	
-	
 	StudentClassSchedule studentClassSchedule = new StudentClassSchedule();
 
 	public static class EfficientAdapter extends BaseAdapter {
@@ -227,7 +225,7 @@ public class ScheduleListView extends Activity {
 		return true;
 	}
 	
-private Animation inFromRightAnimation() {
+	private Animation inFromRightAnimation() {
 		 
         Animation inFromRight = new TranslateAnimation(
                         Animation.RELATIVE_TO_PARENT, +1.0f,
@@ -239,7 +237,7 @@ private Animation inFromRightAnimation() {
         return inFromRight;
 }
 
-private Animation outToLeftAnimation() {
+	private Animation outToLeftAnimation() {
         Animation outtoLeft = new TranslateAnimation(
                         Animation.RELATIVE_TO_PARENT, 0.0f,
                         Animation.RELATIVE_TO_PARENT, -1.0f,
@@ -250,7 +248,7 @@ private Animation outToLeftAnimation() {
         return outtoLeft;
 }
 
-private Animation inFromLeftAnimation() {
+	private Animation inFromLeftAnimation() {
         Animation inFromLeft = new TranslateAnimation(
                         Animation.RELATIVE_TO_PARENT, -1.0f,
                         Animation.RELATIVE_TO_PARENT, 0.0f,
@@ -261,7 +259,7 @@ private Animation inFromLeftAnimation() {
         return inFromLeft;
 }
 
-private Animation outToRightAnimation() {
+	private Animation outToRightAnimation() {
         Animation outtoRight = new TranslateAnimation(
                         Animation.RELATIVE_TO_PARENT, 0.0f,
                         Animation.RELATIVE_TO_PARENT, +1.0f,
