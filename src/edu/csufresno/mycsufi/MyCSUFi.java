@@ -20,7 +20,6 @@ public class MyCSUFi extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
-        
         // Attempt Schedule load from DB
         studentClassSchedule.loadFromDB(this);        
         final Button loginButton = (Button) findViewById(R.id.loginButton);
